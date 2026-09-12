@@ -48,6 +48,7 @@ Route::get('/transparansi', [App\Http\Controllers\PublicBudgetController::class,
 Route::get('/dokumen/musrenbang', [App\Http\Controllers\DocumentController::class, 'musrenbang'])->name('documents.musrenbang');
 Route::get('/dokumen/renstra-renja', [App\Http\Controllers\DocumentController::class, 'renstraRenja'])->name('documents.renstra_renja');
 Route::get('/dokumen/sk-kelembagaan', [App\Http\Controllers\DocumentController::class, 'skKelembagaan'])->name('documents.sk_kelembagaan');
+Route::get('/dokumen/download/{document}', [App\Http\Controllers\DocumentController::class, 'download'])->name('documents.download');
 
 // ----------------------------------------------------------------
 // LAYANAN & SOP ROUTES (PUBLIC)
@@ -94,6 +95,9 @@ Route::middleware('auth')->group(function () {
 
     // Kelola & Unggah Dokumen PDF
     Route::get('/dashboard/documents', [DashboardDocumentController::class, 'index'])->name('dashboard.documents.index');
+    Route::post('/dashboard/documents', [DashboardDocumentController::class, 'store'])->name('dashboard.documents.store');
+    Route::delete('/dashboard/documents/{document}', [DashboardDocumentController::class, 'destroy'])->name('dashboard.documents.destroy');
+    Route::get('/dashboard/documents/{document}/download', [DashboardDocumentController::class, 'download'])->name('dashboard.documents.download');
 
     // ----------------------------------------------------------------
     // ADMIN ONLY ROUTES
