@@ -67,11 +67,17 @@
             <label class="block text-sm font-bold text-slate-700 mb-2">Foto Sampul (Thumbnail Album)</label>
             <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
                 <div class="w-28 h-20 bg-slate-900 rounded-lg overflow-hidden shrink-0 border border-slate-300">
-                    <img src="{{ $album->cover_url }}" alt="Sampul Saat Ini" class="w-full h-full object-cover">
+                    <img id="editCoverPreview" src="{{ $album->cover_url }}" alt="Sampul Saat Ini" class="w-full h-full object-cover">
                 </div>
                 <div class="space-y-2 w-full">
                     <span class="text-xs text-slate-500 font-bold block">Ganti Sampul (Biarkan kosong jika tidak diubah):</span>
-                    <input type="file" name="cover_image" id="cover_image" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 transition cursor-pointer">
+                    <div class="flex items-center gap-2">
+                        <input type="file" name="cover_image" id="cover_image" data-ratio="16:9" data-preview="#editCoverPreview" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 transition cursor-pointer">
+                        <button type="button" onclick="window.CropHelper && window.CropHelper.open(document.getElementById('cover_image'))" class="shrink-0 text-xs text-emerald-700 bg-emerald-50 hover:bg-emerald-100 font-bold px-3 py-1.5 rounded-xl border border-emerald-200 transition inline-flex items-center gap-1 shadow-2xs cursor-pointer">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 0L4 4m5.121 5.121L4 14.121M14.121 9.121L19 4"/></svg>
+                            Potong (HD)
+                        </button>
+                    </div>
                     <input type="url" name="cover_image_url" placeholder="Atau paste URL Foto Sampul Baru" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs font-mono">
                 </div>
             </div>

@@ -59,8 +59,16 @@
         <div>
             <label class="block text-sm font-bold text-slate-700 mb-2">Foto Sampul (Thumbnail Album) <span class="text-red-500">*</span></label>
             <div class="space-y-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                <div class="flex items-center gap-4">
-                    <input type="file" name="cover_image" id="cover_image" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 transition cursor-pointer">
+                <div id="coverPreviewContainer" class="hidden mb-2">
+                    <p class="text-xs text-slate-500 mb-2 font-semibold">Preview Sampul Album (Rasio 16:9):</p>
+                    <img id="previewCoverImg" src="" alt="Preview Sampul" class="max-h-56 aspect-video rounded-xl border border-slate-200 shadow-sm mx-auto object-cover">
+                </div>
+                <div class="flex items-center gap-3">
+                    <input type="file" name="cover_image" id="cover_image" data-ratio="16:9" data-preview="#previewCoverImg" accept="image/*" onchange="document.getElementById('coverPreviewContainer').classList.remove('hidden')" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 transition cursor-pointer">
+                    <button type="button" onclick="window.CropHelper && window.CropHelper.open(document.getElementById('cover_image'))" class="shrink-0 text-xs text-emerald-700 bg-emerald-50 hover:bg-emerald-100 font-bold px-3.5 py-2.5 rounded-xl border border-emerald-200 transition inline-flex items-center gap-1.5 shadow-xs cursor-pointer">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 0L4 4m5.121 5.121L4 14.121M14.121 9.121L19 4"/></svg>
+                        Potong (HD)
+                    </button>
                 </div>
                 <div class="text-xs text-slate-400 text-center uppercase font-bold">atau link URL gambar</div>
                 <input type="url" name="cover_image_url" id="cover_image_url" value="{{ old('cover_image_url') }}" placeholder="https://example.com/foto-sampul.jpg" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-xs font-mono">
