@@ -74,6 +74,7 @@ Route::middleware('auth')->group(function () {
     // Galeri Routes (All Auth Users)
     Route::resource('/dashboard/galleries', GalleryController::class, ['as' => 'dashboard'])->except(['show']);
     Route::delete('/dashboard/galleries/photos/{photo}', [GalleryController::class, 'destroyPhoto'])->name('dashboard.galleries.photos.destroy');
+    Route::resource('/dashboard/videos', App\Http\Controllers\Dashboard\VideoController::class, ['as' => 'dashboard'])->except(['show']);
 
     // Pengumuman Routes (All Auth Users)
     Route::resource('/dashboard/announcements', AnnouncementController::class, ['as' => 'dashboard'])->except(['show']);
