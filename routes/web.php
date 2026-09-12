@@ -39,6 +39,7 @@ Route::get('/berita/{slug}', [App\Http\Controllers\PublicPostController::class, 
 
 Route::get('/galeri', [App\Http\Controllers\PublicGalleryController::class, 'index'])->name('galleries.index');
 Route::get('/galeri/{slug}', [App\Http\Controllers\PublicGalleryController::class, 'show'])->name('galleries.show');
+Route::get('/video', [App\Http\Controllers\PublicVideoController::class, 'index'])->name('videos.index');
 Route::get('/agenda', [App\Http\Controllers\AgendaController::class, 'index'])->name('agendas.index');
 Route::get('/lembaga', [App\Http\Controllers\LembagaController::class, 'index'])->name('lembaga.index');
 Route::get('/lembaga-kemasyarakatan', [App\Http\Controllers\LembagaController::class, 'index']);
