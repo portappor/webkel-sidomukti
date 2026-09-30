@@ -35,7 +35,7 @@
                 </ol>
             </nav>
 
-            <div class="max-w-3xl">
+            <div class="max-w-4xl">
                 <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-900/40 border border-emerald-500/30 rounded-full text-emerald-300 text-[11px] font-bold uppercase tracking-wider mb-3">
                     <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
                     Arsip Album Dokumentasi Visual
@@ -46,42 +46,28 @@
                 <p class="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-2xl">
                     Arsip dokumentasi resmi program pembangunan, pemberdayaan masyarakat, kegiatan keagamaan, dan momen bersejarah Kelurahan Sidomukti.
                 </p>
+
+                {{-- Category Filter Pills in Header (Matching Berita Index Style) --}}
+                @if(isset($categories) && $categories->count() > 0)
+                <div class="flex flex-wrap items-center gap-2 mt-5">
+                    <a href="{{ route('galleries.index', ['category' => 'all']) }}" 
+                       class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition {{ ($selectedCategory ?? 'all') === 'all' ? 'bg-emerald-500 text-slate-950 font-bold shadow-sm' : 'bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700' }}">
+                        Semua Album
+                    </a>
+                    @foreach($categories as $cat)
+                    <a href="{{ route('galleries.index', ['category' => $cat->slug]) }}" 
+                       class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition {{ ($selectedCategory ?? '') === $cat->slug || ($selectedCategory ?? '') === $cat->name ? 'bg-emerald-500 text-slate-950 font-bold shadow-sm' : 'bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700' }}">
+                        {{ $cat->name }}
+                    </a>
+                    @endforeach
+                </div>
+                @endif
             </div>
         </div>
     </div>
 
     <!-- Container Utama -->
-    <div class="container mx-auto px-4 max-w-7xl">
-
-        <!-- Filter Bar Kategori Kegiatan -->
-        <div class="bg-white rounded-2xl p-4 md:p-5 shadow-sm border border-slate-200/90 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
-                <a href="{{ route('galleries.index', ['category' => 'all']) }}" 
-                   class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap {{ ($category ?? 'all') === 'all' ? 'bg-emerald-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
-                   Semua Album
-                </a>
-                <a href="{{ route('galleries.index', ['category' => 'pembangunan']) }}" 
-                   class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap {{ ($category ?? '') === 'pembangunan' ? 'bg-emerald-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
-                   Pembangunan
-                </a>
-                <a href="{{ route('galleries.index', ['category' => 'pemberdayaan']) }}" 
-                   class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap {{ ($category ?? '') === 'pemberdayaan' ? 'bg-emerald-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
-                   Pemberdayaan
-                </a>
-                <a href="{{ route('galleries.index', ['category' => 'keagamaan']) }}" 
-                   class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap {{ ($category ?? '') === 'keagamaan' ? 'bg-emerald-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
-                   Keagamaan
-                </a>
-                <a href="{{ route('galleries.index', ['category' => 'hut-ri']) }}" 
-                   class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap {{ ($category ?? '') === 'hut-ri' ? 'bg-emerald-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
-                   HUT RI
-                </a>
-            </div>
-
-            <div class="text-xs text-slate-500 font-medium shrink-0">
-                Menampilkan {{ $albums->total() }} Album Foto
-            </div>
-        </div>
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
 
         <!-- Grid Album Kartu -->
         @if($albums->count() > 0)
@@ -98,7 +84,7 @@
                     <!-- Category Badge Top-Left -->
                     <div class="absolute top-3 left-3 z-10">
                         <span class="px-2.5 py-1 bg-slate-900/80 backdrop-blur-md text-emerald-400 text-[10px] font-extrabold uppercase tracking-wider rounded-lg border border-slate-700">
-                            {{ ucfirst($album->category) }}
+                            {{ $categories->firstWhere('slug', $album->category)?->name ?? $categories->firstWhere('name', $album->category)?->name ?? ucfirst($album->category) }}
                         </span>
                     </div>
 

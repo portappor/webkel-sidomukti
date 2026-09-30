@@ -15,7 +15,7 @@
 </div>
 
 <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden max-w-2xl">
-    <form action="{{ route('dashboard.videos.store') }}" method="POST" class="p-6 md:p-8 space-y-6">
+    <form action="{{ route('dashboard.videos.store') }}" method="POST" onsubmit="return validateYoutubeUrlForm(this)" class="p-6 md:p-8 space-y-6">
         @csrf
 
         <div>
@@ -30,11 +30,12 @@
             <div>
                 <label for="category" class="block text-sm font-bold text-slate-700 mb-2">Kategori Kegiatan <span class="text-red-500">*</span></label>
                 <select name="category" id="category" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-green-500 transition bg-white shadow-sm">
-                    <option value="pemerintahan" {{ old('category') == 'pemerintahan' ? 'selected' : '' }}>Pemerintahan & Pelayanan</option>
-                    <option value="pembangunan" {{ old('category') == 'pembangunan' ? 'selected' : '' }}>Infrastruktur & Pembangunan</option>
-                    <option value="pemberdayaan" {{ old('category') == 'pemberdayaan' ? 'selected' : '' }}>Pemberdayaan & UMKM</option>
-                    <option value="keagamaan" {{ old('category') == 'keagamaan' ? 'selected' : '' }}>Keagamaan & Kemasyarakatan</option>
-                    <option value="hut-ri" {{ old('category') == 'hut-ri' ? 'selected' : '' }}>Peringatan HUT RI & Seni Budaya</option>
+                    <option value="">-- Pilih Kategori Video --</option>
+                    @foreach($categories as $cat)
+                    <option value="{{ $cat->slug }}" {{ old('category') == $cat->slug || old('category') == $cat->name ? 'selected' : '' }}>
+                        {{ $cat->name }}
+                    </option>
+                    @endforeach
                 </select>
             </div>
 
@@ -46,7 +47,7 @@
 
         <div>
             <label for="youtube_url" class="block text-sm font-bold text-slate-700 mb-2">Link / URL Video YouTube <span class="text-red-500">*</span></label>
-            <input type="url" name="youtube_url" id="youtube_url" value="{{ old('youtube_url') }}" required class="w-full px-4 py-3 rounded-xl border @error('youtube_url') border-red-500 @else border-slate-300 @enderror focus:ring-2 focus:ring-green-500 transition shadow-sm font-mono text-xs" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ atau https://youtu.be/...">
+            <input type="url" name="youtube_url" id="youtube_url" value="{{ old('youtube_url') }}" required onchange="validateYoutubeUrlInput(this)" class="w-full px-4 py-3 rounded-xl border @error('youtube_url') border-red-500 @else border-slate-300 @enderror focus:ring-2 focus:ring-green-500 transition shadow-sm font-mono text-xs" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ atau https://youtu.be/...">
             @error('youtube_url')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
             @enderror
@@ -66,4 +67,28 @@
         </div>
     </form>
 </div>
+
+<script>
+function validateYoutubeUrlInput(input) {
+    const url = (input.value || '').trim();
+    if (!url) return true;
+    
+    const isYoutube = /^(https?:\/\/)?(www\.|m\.)?(youtube\.com\/(watch\?.*v=|embed\/|v\/|shorts\/)|youtu\.be\/)[a-zA-Z0-9_-]+/i.test(url);
+    if (!isYoutube) {
+        input.value = '';
+        alert('🚫 AKSES DITOLAK!\n\nLink \'' + url + '\' bukan merupakan link dari YOUTUBE.\n\nSistem secara otomatis menolak tautan selain dari YouTube. Silakan masukkan Link / URL Video resmi YouTube (contoh: https://www.youtube.com/watch?v=... atau https://youtu.be/...).');
+        setTimeout(() => input.focus(), 100);
+        return false;
+    }
+    return true;
+}
+
+function validateYoutubeUrlForm(form) {
+    const input = form.querySelector('[name="youtube_url"]');
+    if (input) {
+        return validateYoutubeUrlInput(input);
+    }
+    return true;
+}
+</script>
 @endsection

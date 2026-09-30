@@ -1,7 +1,7 @@
 <!-- Modal Crop Foto Universal (HD Resolution Auto-Adapter) -->
 <div id="cropperModal" class="fixed inset-0 z-50 overflow-y-auto hidden" x-cloak>
     <!-- Overlay Backdrop -->
-    <div class="fixed inset-0 bg-slate-950/80 backdrop-blur-xs transition-opacity" onclick="window.CropHelper.close()"></div>
+    <div class="fixed inset-0 bg-slate-950/80 backdrop-blur-xs transition-opacity"></div>
 
     <!-- Modal Box -->
     <div class="flex min-h-full items-center justify-center p-4 text-center">
@@ -105,9 +105,14 @@ window.CropHelper = (function() {
         init: function() {
             // Auto bind event listener pada seluruh input file gambar yang tidak memiliki atribut data-no-crop
             document.addEventListener('change', function(e) {
-                if (e.target && e.target.matches('input[type="file"][accept*="image"]') && !e.target.dataset.noCrop) {
+                if (e.target && e.target.matches('input[type="file"][accept*="image"]')) {
                     if (e.target.files && e.target.files[0]) {
-                        window.CropHelper.open(e.target);
+                        if (window.validateImageUpload && !window.validateImageUpload(e.target)) {
+                            return;
+                        }
+                        if (!e.target.dataset.noCrop) {
+                            window.CropHelper.open(e.target);
+                        }
                     }
                 }
             });
@@ -117,6 +122,10 @@ window.CropHelper = (function() {
             targetInput = inputElement;
             const file = overrideFile || (inputElement.files ? inputElement.files[0] : null);
             if (!file) return;
+
+            if (window.validateImageUpload && !window.validateImageUpload(inputElement)) {
+                return;
+            }
 
             originalFile = file;
 
@@ -151,10 +160,10 @@ window.CropHelper = (function() {
                     else if (customRatio === '4/3' || customRatio === '4:3') defaultRatio = 4 / 3;
                     else if (customRatio === '3/4' || customRatio === '3:4') defaultRatio = 3 / 4;
                     else defaultRatio = parseFloat(customRatio);
-                } else if (inputName.match(/lurah|avatar|pas_foto|profile|user|foto_lurah/)) {
-                    defaultRatio = 1; // Square 1:1 untuk pas foto/lurah/avatar
-                } else if (inputName.match(/cover|thumbnail|banner|image|photo|galleries|post|foto/)) {
-                    defaultRatio = 16 / 9; // 16:9 Banner/Sampul Album/Berita
+                } else if (inputName.match(/lurah|avatar|pas_foto|profile|user|foto_lurah|logo/)) {
+                    defaultRatio = 1; // Square 1:1 untuk pas foto/lurah/avatar/logo
+                } else if (inputName.match(/cover|thumbnail|banner|hero|background|image|photo|galleries|post|foto/)) {
+                    defaultRatio = 16 / 9; // 16:9 Banner/Sampul Album/Berita/Hero Background
                 }
 
                 cropper = new Cropper(img, {

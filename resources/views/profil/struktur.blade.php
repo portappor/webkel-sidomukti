@@ -52,7 +52,7 @@
 
     <!-- Main Content Area -->
     <div class="container mx-auto px-4 py-8 max-w-6xl space-y-8">
-        
+
         @php
             // Extract settings data
             $lurahVal = $settings['foto_lurah'] ?? $settings['kadin_photo'] ?? '';
@@ -61,51 +61,46 @@
             $lurahNip = $settings['nip_lurah'] ?? '';
             $lurahJabatan = $settings['jabatan_lurah'] ?? 'Lurah Sidomukti';
 
-            $lpmkVal = $settings['foto_lpmk'] ?? '';
-            $lpmkSrc = $lpmkVal ? (\Illuminate\Support\Str::startsWith($lpmkVal, ['http://', 'https://']) ? $lpmkVal : Storage::url($lpmkVal)) : 'https://ui-avatars.com/api/?name=' . urlencode($settings['nama_lpmk'] ?? 'LPMK') . '&background=10b981&color=fff&size=200';
-            $lpmkNama = $settings['nama_lpmk'] ?? '-';
-            $lpmkJabatan = $settings['jabatan_lpmk'] ?? 'Lembaga Pemberdayaan Masyarakat (LPMK)';
-
             $sekVal = $settings['foto_sekretaris'] ?? '';
             $sekSrc = $sekVal ? (\Illuminate\Support\Str::startsWith($sekVal, ['http://', 'https://']) ? $sekVal : Storage::url($sekVal)) : 'https://ui-avatars.com/api/?name=' . urlencode($settings['nama_sekretaris'] ?? 'Budi Santoso') . '&background=64748b&color=fff&size=200';
             $sekNama = $settings['nama_sekretaris'] ?? 'Budi Santoso, S.Sos';
             $sekNip = $settings['nip_sekretaris'] ?? '';
+            $sekJabatan = $settings['jabatan_sekretaris'] ?? 'Sekretaris Kelurahan Sidomukti';
+            $sekSeksi = $settings['seksi_sekretaris'] ?? 'Kelompok Jabatan Fungsional';
 
             $pemVal = $settings['foto_kasi_pemerintahan'] ?? '';
             $pemSrc = $pemVal ? (\Illuminate\Support\Str::startsWith($pemVal, ['http://', 'https://']) ? $pemVal : Storage::url($pemVal)) : 'https://ui-avatars.com/api/?name=' . urlencode($settings['nama_kasi_pemerintahan'] ?? 'Hendra Setiawan') . '&background=64748b&color=fff&size=200';
             $pemNama = $settings['nama_kasi_pemerintahan'] ?? 'Hendra Setiawan, S.AP';
             $pemNip = $settings['nip_kasi_pemerintahan'] ?? '';
+            $pemJabatan = $settings['jabatan_kasi_pemerintahan'] ?? 'Kasi Pemerintahan';
+            $pemSeksi = $settings['seksi_kasi_pemerintahan'] ?? 'Kelompok Jabatan Fungsional';
 
             $trantibVal = $settings['foto_kasi_trantib'] ?? '';
             $trantibSrc = $trantibVal ? (\Illuminate\Support\Str::startsWith($trantibVal, ['http://', 'https://']) ? $trantibVal : Storage::url($trantibVal)) : 'https://ui-avatars.com/api/?name=' . urlencode($settings['nama_kasi_trantib'] ?? 'M Rizky Pratama') . '&background=64748b&color=fff&size=200';
             $trantibNama = $settings['nama_kasi_trantib'] ?? 'M. Rizky Pratama, S.IP';
             $trantibNip = $settings['nip_kasi_trantib'] ?? '';
+            $trantibJabatan = $settings['jabatan_kasi_trantib'] ?? 'Kasi Trantib (Ketentraman & Ketertiban)';
+            $trantibSeksi = $settings['seksi_kasi_trantib'] ?? 'Kelompok Jabatan Fungsional';
 
             $kesraVal = $settings['foto_kasi_kesra'] ?? '';
             $kesraSrc = $kesraVal ? (\Illuminate\Support\Str::startsWith($kesraVal, ['http://', 'https://']) ? $kesraVal : Storage::url($kesraVal)) : 'https://ui-avatars.com/api/?name=' . urlencode($settings['nama_kasi_kesra'] ?? 'Nurul Hidayah') . '&background=64748b&color=fff&size=200';
             $kesraNama = $settings['nama_kasi_kesra'] ?? 'Nurul Hidayah, SE., MM';
             $kesraNip = $settings['nip_kasi_kesra'] ?? '';
+            $kesraJabatan = $settings['jabatan_kasi_kesra'] ?? 'Kasi Pembangunan & Kesra';
+            $kesraSeksi = $settings['seksi_kasi_kesra'] ?? 'Kelompok Jabatan Fungsional';
 
             $baganVal = $settings['gambar_bagan_struktur'] ?? '';
             $baganSrc = $baganVal ? (\Illuminate\Support\Str::startsWith($baganVal, ['http://', 'https://']) ? $baganVal : Storage::url($baganVal)) : '';
+
+            $aparaturTambahan = json_decode($settings['aparatur_tambahan'] ?? '[]', true) ?: [];
         @endphp
 
         <!-- Chart Container -->
         <div class="bg-white rounded-2xl border border-slate-200 p-6 md:p-12 shadow-sm overflow-x-auto">
             <div class="min-w-[850px] flex flex-col items-center">
-                
+
                 <!-- Level 1 (Lurah) -->
                 <div class="relative flex flex-col items-center z-10 mt-4">
-                    <!-- Floating Left Box (LPMK Marker) -->
-                    <div class="absolute top-1/2 right-full mr-16 -translate-y-1/2 flex items-center">
-                        <div class="bg-white border border-slate-200 rounded-xl p-3 shadow-sm w-48 text-center z-10">
-                            <span class="text-[9.5px] font-extrabold text-slate-700 uppercase leading-relaxed block">{{ $lpmkJabatan }}</span>
-                            @if($lpmkNama && $lpmkNama !== '-')
-                            <span class="text-[10px] text-emerald-700 font-bold block mt-0.5">{{ $lpmkNama }}</span>
-                            @endif
-                        </div>
-                        <div class="w-16 h-px bg-slate-300 absolute left-full"></div>
-                    </div>
 
                     <img src="{{ $lurahSrc }}" alt="{{ $lurahNama }}" class="w-28 h-28 rounded-full border-[4px] border-slate-900 shadow-md mb-3 object-cover bg-slate-100">
                     <h4 class="font-extrabold text-slate-900 text-sm md:text-base">{{ $lurahNama }}</h4>
@@ -119,23 +114,14 @@
 
                 <div class="w-px h-10 bg-slate-300 my-1"></div>
 
-                <!-- Level 2 (LPMK Center) -->
-                <div class="relative flex flex-col items-center z-10">
-                    <img src="{{ $lpmkSrc }}" alt="LPMK" class="w-16 h-16 rounded-full border-[3px] border-emerald-500 shadow-sm mb-2 object-cover bg-emerald-50">
-                    <h4 class="font-bold text-slate-900 text-xs">{{ $lpmkNama }}</h4>
-                    <div class="bg-emerald-600 text-white text-[9px] font-extrabold px-4 py-1 rounded-full mt-1 uppercase tracking-widest shadow-2xs">
-                        {{ $lpmkJabatan }}
-                    </div>
-                </div>
 
-                <div class="w-px h-10 bg-slate-300 my-1"></div>
 
                 <!-- Level 3 (Branches) -->
                 <div class="w-full relative pt-6 mt-1">
                     <div class="absolute top-0 left-[12.5%] right-[12.5%] h-px bg-slate-300"></div>
-                    
-                    <div class="grid grid-cols-4 gap-6">
-                        
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 place-content-center">
+
                         <!-- Col 1 (Sekretaris) -->
                         <div class="flex flex-col items-center text-center relative z-10 group">
                             <div class="w-px h-6 bg-slate-300 absolute -top-6 left-1/2 -translate-x-1/2"></div>
@@ -145,10 +131,10 @@
                             <p class="text-[10px] font-mono text-slate-500 mb-1">NIP. {{ $sekNip }}</p>
                             @endif
                             <div class="bg-slate-900 text-white text-[8px] font-extrabold px-2 py-1.5 rounded-md w-full uppercase tracking-wider leading-relaxed shadow-2xs mb-2">
-                                Sekretaris Kelurahan<br>Sidomukti
+                                {{ $sekJabatan }}
                             </div>
                             <div class="border border-slate-200 rounded px-2 py-1.5 bg-slate-50/50 w-full mt-auto">
-                                <span class="text-[7.5px] text-slate-500 uppercase font-bold tracking-wider">Kelompok Jabatan Fungsional</span>
+                                <span class="text-[7.5px] text-slate-500 uppercase font-bold tracking-wider">{{ $sekSeksi }}</span>
                             </div>
                         </div>
 
@@ -161,10 +147,10 @@
                             <p class="text-[10px] font-mono text-slate-500 mb-1">NIP. {{ $pemNip }}</p>
                             @endif
                             <div class="bg-slate-900 text-white text-[8px] font-extrabold px-2 py-1.5 rounded-md w-full uppercase tracking-wider leading-relaxed shadow-2xs mb-2">
-                                Kasi Pemerintahan
+                                {{ $pemJabatan }}
                             </div>
                             <div class="border border-slate-200 rounded px-2 py-1.5 bg-slate-50/50 w-full mt-auto">
-                                <span class="text-[7.5px] text-slate-500 uppercase font-bold tracking-wider">Kelompok Jabatan Fungsional</span>
+                                <span class="text-[7.5px] text-slate-500 uppercase font-bold tracking-wider">{{ $pemSeksi }}</span>
                             </div>
                         </div>
 
@@ -177,10 +163,10 @@
                             <p class="text-[10px] font-mono text-slate-500 mb-1">NIP. {{ $trantibNip }}</p>
                             @endif
                             <div class="bg-slate-900 text-white text-[8px] font-extrabold px-2 py-1.5 rounded-md w-full uppercase tracking-wider leading-relaxed shadow-2xs mb-2">
-                                Kasi Trantib<br>(Ketentraman & Ketertiban)
+                                {{ $trantibJabatan }}
                             </div>
                             <div class="border border-slate-200 rounded px-2 py-1.5 bg-slate-50/50 w-full mt-auto">
-                                <span class="text-[7.5px] text-slate-500 uppercase font-bold tracking-wider">Kelompok Jabatan Fungsional</span>
+                                <span class="text-[7.5px] text-slate-500 uppercase font-bold tracking-wider">{{ $trantibSeksi }}</span>
                             </div>
                         </div>
 
@@ -193,12 +179,38 @@
                             <p class="text-[10px] font-mono text-slate-500 mb-1">NIP. {{ $kesraNip }}</p>
                             @endif
                             <div class="bg-slate-900 text-white text-[8px] font-extrabold px-2 py-1.5 rounded-md w-full uppercase tracking-wider leading-relaxed shadow-2xs mb-2">
-                                Kasi Pembangunan &<br>Kesra
+                                {{ $kesraJabatan }}
                             </div>
                             <div class="border border-slate-200 rounded px-2 py-1.5 bg-slate-50/50 w-full mt-auto">
-                                <span class="text-[7.5px] text-slate-500 uppercase font-bold tracking-wider">Kelompok Jabatan Fungsional</span>
+                                <span class="text-[7.5px] text-slate-500 uppercase font-bold tracking-wider">{{ $kesraSeksi }}</span>
                             </div>
                         </div>
+
+                        <!-- Dynamic Aparatur Tambahan -->
+                        @foreach($aparaturTambahan as $anggota)
+                        @php
+                            $anggotaVal = $anggota['foto'] ?? '';
+                            if (!empty($anggota['foto_url'])) {
+                                $anggotaSrc = $anggota['foto_url'];
+                            } else {
+                                $anggotaSrc = $anggotaVal ? (\Illuminate\Support\Str::startsWith($anggotaVal, ['http://', 'https://']) ? $anggotaVal : Storage::url($anggotaVal)) : 'https://ui-avatars.com/api/?name=' . urlencode($anggota['nama'] ?? 'Anggota') . '&background=64748b&color=fff&size=200';
+                            }
+                        @endphp
+                        <div class="flex flex-col items-center text-center relative z-10 group">
+                            <div class="w-px h-6 bg-slate-300 absolute -top-6 left-1/2 -translate-x-1/2"></div>
+                            <img src="{{ $anggotaSrc }}" alt="{{ $anggota['nama'] }}" class="w-20 h-20 rounded-full border-2 border-slate-300 shadow-2xs mb-3 bg-slate-50 object-cover group-hover:-translate-y-1 transition-transform">
+                            <h4 class="font-bold text-slate-900 text-xs mb-0.5">{{ $anggota['nama'] }}</h4>
+                            @if(!empty($anggota['nip']))
+                            <p class="text-[10px] font-mono text-slate-500 mb-1">NIP. {{ $anggota['nip'] }}</p>
+                            @endif
+                            <div class="bg-slate-900 text-white text-[8px] font-extrabold px-2 py-1.5 rounded-md w-full uppercase tracking-wider leading-relaxed shadow-2xs mb-2">
+                                {!! nl2br(e($anggota['jabatan'])) !!}
+                            </div>
+                            <div class="border border-slate-200 rounded px-2 py-1.5 bg-slate-50/50 w-full mt-auto">
+                                <span class="text-[7.5px] text-slate-500 uppercase font-bold tracking-wider">{{ !empty($anggota['seksi']) ? $anggota['seksi'] : 'Kelompok Jabatan Fungsional' }}</span>
+                            </div>
+                        </div>
+                        @endforeach
 
                     </div>
                 </div>
@@ -219,18 +231,6 @@
         </div>
         @endif
 
-        <!-- Narasi / Keterangan Struktur Organisasi -->
-        @if(!empty($settings['struktur_organisasi']))
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 md:p-8 shadow-sm space-y-3">
-            <h3 class="text-base font-bold text-slate-800 border-b border-slate-100 pb-3 flex items-center gap-2">
-                <svg class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                Tugas Pokok & Penjelasan Struktur Organisasi
-            </h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed whitespace-pre-line">
-                {{ $settings['struktur_organisasi'] }}
-            </p>
-        </div>
-        @endif
 
     </div>
 

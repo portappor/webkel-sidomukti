@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\HasFileCleanup;
 
 class Album extends Model
 {
-    use HasFactory;
+    use HasFactory, HasFileCleanup;
+
+    protected array $fileAttributes = ['cover_image'];
 
     protected $fillable = [
         'title',

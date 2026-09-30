@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use App\Models\AlbumPhoto;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -14,12 +15,20 @@ class GalleryController extends Controller
     public function index()
     {
         $albums = Album::withCount('photos')->latest()->paginate(12);
-        return view('dashboard.galleries.index', compact('albums'));
+        $categories = Category::where('module', 'galeri')->where('status', 'aktif')->orderBy('order')->orderBy('name')->get();
+        if ($categories->isEmpty()) {
+            $categories = Category::where('status', 'aktif')->orderBy('name')->get();
+        }
+        return view('dashboard.galleries.index', compact('albums', 'categories'));
     }
 
     public function create()
     {
-        return view('dashboard.galleries.create');
+        $categories = Category::where('module', 'galeri')->where('status', 'aktif')->orderBy('order')->orderBy('name')->get();
+        if ($categories->isEmpty()) {
+            $categories = Category::where('status', 'aktif')->orderBy('name')->get();
+        }
+        return view('dashboard.galleries.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -101,7 +110,11 @@ class GalleryController extends Controller
     public function edit($id)
     {
         $album = Album::with('photos')->findOrFail($id);
-        return view('dashboard.galleries.edit', compact('album'));
+        $categories = Category::where('module', 'galeri')->where('status', 'aktif')->orderBy('order')->orderBy('name')->get();
+        if ($categories->isEmpty()) {
+            $categories = Category::where('status', 'aktif')->orderBy('name')->get();
+        }
+        return view('dashboard.galleries.edit', compact('album', 'categories'));
     }
 
     public function update(Request $request, $id)
@@ -120,9 +133,6 @@ class GalleryController extends Controller
         ]);
 
         if ($request->hasFile('cover_image')) {
-            if ($album->cover_image && Storage::disk('public')->exists($album->cover_image)) {
-                Storage::disk('public')->delete($album->cover_image);
-            }
             $coverPath = $request->file('cover_image')->store('albums/covers', 'public');
             $album->cover_image = $coverPath;
         } elseif ($request->filled('cover_image_url')) {
@@ -173,18 +183,12 @@ class GalleryController extends Controller
         $album = Album::with('photos')->findOrFail($id);
         $title = $album->title;
 
-        // Delete cover image file if stored locally
-        if ($album->cover_image && Storage::disk('public')->exists($album->cover_image)) {
-            Storage::disk('public')->delete($album->cover_image);
-        }
-
-        // Delete all photo files stored locally
+        // Hapus tiap foto anggota (memicu event model AlbumPhoto deleting & pembersihan file fisik)
         foreach ($album->photos as $photo) {
-            if ($photo->image_path && Storage::disk('public')->exists($photo->image_path)) {
-                Storage::disk('public')->delete($photo->image_path);
-            }
+            $photo->delete();
         }
 
+        // Hapus album (memicu event model Album deleting & pembersihan cover_image fisik)
         $album->delete();
 
         ActivityLogger::log('DELETE', 'Galeri', "Menghapus album foto: {$title}");
@@ -195,12 +199,8 @@ class GalleryController extends Controller
     public function destroyPhoto($id)
     {
         $photo = AlbumPhoto::findOrFail($id);
-        $albumId = $photo->album_id;
 
-        if ($photo->image_path && Storage::disk('public')->exists($photo->image_path)) {
-            Storage::disk('public')->delete($photo->image_path);
-        }
-
+        // Hapus foto (memicu event model AlbumPhoto deleting & pembersihan file fisik)
         $photo->delete();
 
         return redirect()->back()->with('success', 'Foto berhasil dihapus dari album.');

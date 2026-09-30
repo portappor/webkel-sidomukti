@@ -14,11 +14,7 @@
     </a>
 </div>
 
-@if(session('success'))
-<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl relative mb-6">
-    <span class="block sm:inline font-medium">{{ session('success') }}</span>
-</div>
-@endif
+
 
 <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden max-w-4xl mb-8">
     <form action="{{ route('dashboard.galleries.update', $album->id) }}" method="POST" enctype="multipart/form-data" class="p-6 md:p-8 space-y-6">
@@ -39,11 +35,11 @@
             <div>
                 <label for="category" class="block text-sm font-bold text-slate-700 mb-2">Kategori Kegiatan <span class="text-red-500">*</span></label>
                 <select name="category" id="category" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-green-500 transition bg-white shadow-sm">
-                    <option value="pemerintahan" {{ old('category', $album->category) == 'pemerintahan' ? 'selected' : '' }}>Pemerintahan & Pelayanan</option>
-                    <option value="pembangunan" {{ old('category', $album->category) == 'pembangunan' ? 'selected' : '' }}>Infrastruktur & Pembangunan</option>
-                    <option value="pemberdayaan" {{ old('category', $album->category) == 'pemberdayaan' ? 'selected' : '' }}>Pemberdayaan & UMKM</option>
-                    <option value="keagamaan" {{ old('category', $album->category) == 'keagamaan' ? 'selected' : '' }}>Keagamaan & Kemasyarakatan</option>
-                    <option value="hut-ri" {{ old('category', $album->category) == 'hut-ri' ? 'selected' : '' }}>Peringatan HUT RI & Seni Budaya</option>
+                    @foreach($categories as $cat)
+                    <option value="{{ $cat->slug }}" {{ old('category', $album->category) == $cat->slug || old('category', $album->category) == $cat->name ? 'selected' : '' }}>
+                        {{ $cat->name }}
+                    </option>
+                    @endforeach
                 </select>
             </div>
 
@@ -72,8 +68,8 @@
                 <div class="space-y-2 w-full">
                     <span class="text-xs text-slate-500 font-bold block">Ganti Sampul (Biarkan kosong jika tidak diubah):</span>
                     <div class="flex items-center gap-2">
-                        <input type="file" name="cover_image" id="cover_image" data-ratio="16:9" data-preview="#editCoverPreview" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 transition cursor-pointer">
-                        <button type="button" onclick="window.CropHelper && window.CropHelper.open(document.getElementById('cover_image'))" class="shrink-0 text-xs text-emerald-700 bg-emerald-50 hover:bg-emerald-100 font-bold px-3 py-1.5 rounded-xl border border-emerald-200 transition inline-flex items-center gap-1 shadow-2xs cursor-pointer">
+                        <input type="file" name="cover_image" id="cover_image" data-ratio="16:9" data-preview="#editCoverPreview" accept="image/*" onchange="validateImageUpload(this)" class="w-full text-xs text-slate-500 file:mr-4 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 transition cursor-pointer">
+                        <button type="button" onclick="const input = document.getElementById('cover_image'); if(input.files.length){ if(validateImageUpload(input)){ window.CropHelper.open(input); } } else { alert('Pilih foto sampul terlebih dahulu!'); }" class="shrink-0 text-xs text-emerald-700 bg-emerald-50 hover:bg-emerald-100 font-bold px-3 py-1.5 rounded-xl border border-emerald-200 transition inline-flex items-center gap-1 shadow-2xs cursor-pointer">
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 0L4 4m5.121 5.121L4 14.121M14.121 9.121L19 4"/></svg>
                             Potong (HD)
                         </button>
@@ -89,7 +85,7 @@
         <div>
             <label class="block text-sm font-bold text-slate-700 mb-2">Tambah Foto Dokumentasi Baru ke Album</label>
             <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                <input type="file" name="photos[]" multiple accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-emerald-100 file:text-emerald-800 hover:file:bg-emerald-200 transition cursor-pointer">
+                <input type="file" name="photos[]" multiple accept="image/*" onchange="validateImageUpload(this)" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-emerald-100 file:text-emerald-800 hover:file:bg-emerald-200 transition cursor-pointer">
                 <textarea name="photo_urls" rows="2" placeholder="Atau paste daftar URL foto tambahan (1 per baris)" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs font-mono"></textarea>
             </div>
         </div>

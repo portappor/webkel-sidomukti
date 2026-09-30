@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Video;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Services\ActivityLogger;
 
@@ -12,12 +13,20 @@ class VideoController extends Controller
     public function index()
     {
         $videos = Video::latest()->paginate(12);
-        return view('dashboard.videos.index', compact('videos'));
+        $categories = Category::where('module', 'video')->where('status', 'aktif')->orderBy('order')->orderBy('name')->get();
+        if ($categories->isEmpty()) {
+            $categories = Category::where('status', 'aktif')->orderBy('name')->get();
+        }
+        return view('dashboard.videos.index', compact('videos', 'categories'));
     }
 
     public function create()
     {
-        return view('dashboard.videos.create');
+        $categories = Category::where('module', 'video')->where('status', 'aktif')->orderBy('order')->orderBy('name')->get();
+        if ($categories->isEmpty()) {
+            $categories = Category::where('status', 'aktif')->orderBy('name')->get();
+        }
+        return view('dashboard.videos.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -25,9 +34,17 @@ class VideoController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:100',
-            'youtube_url' => 'required|url',
+            'youtube_url' => [
+                'required',
+                'url',
+                'regex:/^(https?:\/\/)?(www\.|m\.)?(youtube\.com\/(watch\?.*v=|embed\/|v\/|shorts\/)|youtu\.be\/)[a-zA-Z0-9_-]+/i'
+            ],
             'duration' => 'nullable|string|max:20',
             'description' => 'nullable|string',
+        ], [
+            'youtube_url.regex' => '🚫 AKSES DITOLAK! Link yang dimasukkan bukan merupakan link dari YouTube. Hanya URL video resmi YouTube yang diperbolehkan.',
+            'youtube_url.url' => '🚫 AKSES DITOLAK! Format URL/Link tidak valid.',
+            'youtube_url.required' => 'Link / URL Video YouTube wajib diisi.',
         ]);
 
         $video = Video::create($request->all());
@@ -41,7 +58,11 @@ class VideoController extends Controller
 
     public function edit(Video $video)
     {
-        return view('dashboard.videos.edit', compact('video'));
+        $categories = Category::where('module', 'video')->where('status', 'aktif')->orderBy('order')->orderBy('name')->get();
+        if ($categories->isEmpty()) {
+            $categories = Category::where('status', 'aktif')->orderBy('name')->get();
+        }
+        return view('dashboard.videos.edit', compact('video', 'categories'));
     }
 
     public function update(Request $request, Video $video)
@@ -49,9 +70,17 @@ class VideoController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:100',
-            'youtube_url' => 'required|url',
+            'youtube_url' => [
+                'required',
+                'url',
+                'regex:/^(https?:\/\/)?(www\.|m\.)?(youtube\.com\/(watch\?.*v=|embed\/|v\/|shorts\/)|youtu\.be\/)[a-zA-Z0-9_-]+/i'
+            ],
             'duration' => 'nullable|string|max:20',
             'description' => 'nullable|string',
+        ], [
+            'youtube_url.regex' => '🚫 AKSES DITOLAK! Link yang dimasukkan bukan merupakan link dari YouTube. Hanya URL video resmi YouTube yang diperbolehkan.',
+            'youtube_url.url' => '🚫 AKSES DITOLAK! Format URL/Link tidak valid.',
+            'youtube_url.required' => 'Link / URL Video YouTube wajib diisi.',
         ]);
 
         $video->update($request->all());

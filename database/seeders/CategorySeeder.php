@@ -47,19 +47,26 @@ class CategorySeeder extends Seeder
             ],
         ];
 
-        foreach ($categories as $cat) {
-            $createdCat = Category::firstOrCreate(
+        $apbdCategories = [
+            ['name' => 'Pendapatan Transfer', 'slug' => 'pendapatan-transfer', 'module' => 'apbd', 'description' => 'Alokasi Dana Kelurahan (ADK) & Bantuan Keuangan Khusus'],
+            ['name' => 'Lain-Lain Pendapatan Sah', 'slug' => 'lain-lain-pendapatan-sah', 'module' => 'apbd', 'description' => 'Bagi hasil pajak dan retribusi daerah'],
+            ['name' => 'Belanja Operasional', 'slug' => 'belanja-operasional', 'module' => 'apbd', 'description' => 'Operasional pelayanan, ATK, listrik, dan honorarium'],
+            ['name' => 'Belanja Modal / Sarpras', 'slug' => 'belanja-modal-sarpras', 'module' => 'apbd', 'description' => 'Pembangunan drainase, pengaspalan, & infrastruktur'],
+            ['name' => 'Pemberdayaan Masyarakat', 'slug' => 'pemberdayaan-masyarakat', 'module' => 'apbd', 'description' => 'Pelatihan UMKM, pembinaan PKK, & Karang Taruna'],
+            ['name' => 'Belanja Tak Terduga', 'slug' => 'belanja-tak-terduga', 'module' => 'apbd', 'description' => 'Tanggap darurat bencana & kebersihan'],
+            ['name' => 'Penerimaan Pembiayaan', 'slug' => 'penerimaan-pembiayaan', 'module' => 'apbd', 'description' => 'SILPA kas kelurahan tahun sebelumnya'],
+        ];
+
+        foreach ($apbdCategories as $cat) {
+            Category::firstOrCreate(
                 ['slug' => $cat['slug']],
                 [
                     'name' => $cat['name'],
-                    'description' => $cat['description']
+                    'module' => $cat['module'],
+                    'description' => $cat['description'],
+                    'status' => 'aktif',
                 ]
             );
-
-            // Sync existing posts that have string category matching this name
-            Post::whereNull('category_id')
-                ->where('category', $cat['name'])
-                ->update(['category_id' => $createdCat->id]);
         }
     }
 }

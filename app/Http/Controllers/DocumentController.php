@@ -3,161 +3,240 @@
 namespace App\Http\Controllers;
 
 use App\Models\Document;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class DocumentController extends Controller
 {
-    /**
-     * Halaman Dokumen Musrenbang
-     */
-    public function musrenbang()
+    private function getAvailableYears()
     {
-        $dbDocs = Document::where('category', 'musrenbang')->latest()->get();
+        $years = Document::selectRaw('YEAR(published_date) as yr')
+            ->whereNotNull('published_date')
+            ->pluck('yr')
+            ->concat(
+                Document::selectRaw('YEAR(created_at) as yr')->pluck('yr')
+            )
+            ->filter()
+            ->unique()
+            ->sortDesc()
+            ->values()
+            ->toArray();
 
-        if ($dbDocs->count() > 0) {
-            $documents = $dbDocs->map(function ($doc) {
-                return [
-                    'id' => $doc->id,
-                    'title' => $doc->title,
-                    'description' => $doc->description,
-                    'file_name' => $doc->file_name,
-                    'file_size' => $doc->file_size,
-                    'date' => $doc->published_date ? $doc->published_date->translatedFormat('d M Y') : $doc->created_at->translatedFormat('d M Y'),
-                    'year' => $doc->published_date ? $doc->published_date->format('Y') : $doc->created_at->format('Y'),
-                    'category' => 'Berita Acara',
-                    'status' => $doc->status ?? 'Disahkan',
-                    'download_url' => route('documents.download', $doc->id),
-                ];
-            })->toArray();
-        } else {
-            $documents = [
-                [
-                    'id' => 0,
-                    'title' => 'Berita Acara Musrenbang Kelurahan Tahun 2026',
-                    'description' => 'Berita acara resmi hasil kesepakatan Musyawarah Perencanaan Pembangunan Kelurahan Sidomukti untuk usulan prioritas APBD 2026.',
-                    'file_name' => 'BA-Musrenbang-Sidomukti-2026.pdf',
-                    'file_size' => '2.4 MB',
-                    'date' => '15 Jan 2026',
-                    'year' => '2026',
-                    'category' => 'Berita Acara',
-                    'status' => 'Disahkan',
-                    'download_url' => '#',
-                ],
-                [
-                    'id' => 0,
-                    'title' => 'Rekapitulasi Prioritas Usulan RW Sidomukti',
-                    'description' => 'Daftar rekapitulasi usulan fisik infrastruktur dan pemberdayaan masyarakat dari RW 01 hingga RW 06 Kelurahan Sidomukti.',
-                    'file_name' => 'Rekap-Usulan-RW-Sidomukti.pdf',
-                    'file_size' => '1.8 MB',
-                    'date' => '18 Jan 2026',
-                    'year' => '2026',
-                    'category' => 'Rekapitulasi Usulan',
-                    'status' => 'Terverifikasi',
-                    'download_url' => '#',
-                ],
-            ];
+        if (empty($years)) {
+            $years = [2026, 2025, 2024];
         }
 
-        return view('documents.musrenbang', compact('documents'));
+        return $years;
+    }
+
+    private function buildDocumentQuery(Request $request, array $categoryVariants = [])
+    {
+        $query = Document::latest('published_date')->latest('created_at');
+
+        if (!empty($categoryVariants)) {
+            $query->whereIn('category', $categoryVariants);
+        } elseif ($request->filled('kategori') && $request->kategori !== 'all') {
+            $variants = $this->getCategoryVariants($request->kategori);
+            $query->whereIn('category', $variants);
+        }
+
+        $selectedYear = $request->get('tahun');
+        if ($selectedYear && $selectedYear !== 'all') {
+            $query->where(function($q) use ($selectedYear) {
+                $q->whereYear('published_date', $selectedYear)
+                  ->orWhereYear('created_at', $selectedYear);
+            });
+        }
+
+        $search = $request->get('search', $request->get('q'));
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%")
+                  ->orWhere('file_name', 'like', "%{$search}%");
+            });
+        }
+
+        return $query;
+    }
+
+    public function index(Request $request, $tahun = null)
+    {
+        if ($tahun && !$request->has('tahun')) {
+            $request->merge(['tahun' => $tahun]);
+        }
+
+        $selectedCategory = $request->get('kategori', 'all');
+        $selectedYear = $request->get('tahun', 'all');
+        $search = $request->get('search', $request->get('q', ''));
+        $perPage = (int) $request->get('entries', $request->get('per_page', 10));
+        if (!in_array($perPage, [10, 25, 50, 100])) {
+            $perPage = 10;
+        }
+
+        $totalTotal = Document::count();
+        $query = $this->buildDocumentQuery($request);
+        $documents = $query->paginate($perPage)->withQueryString();
+
+        $categories = Category::where('module', 'dokumen')
+            ->where('status', 'aktif')
+            ->orderBy('order', 'asc')
+            ->get();
+
+        $availableYears = $this->getAvailableYears();
+        $pageTitle = 'Dokumen & Arsip Resmi Publik';
+
+        return view('documents.index', compact(
+            'documents', 'categories', 'availableYears', 'selectedCategory', 
+            'selectedYear', 'search', 'perPage', 'totalTotal', 'pageTitle'
+        ));
+    }
+
+    public function musrenbang(Request $request, $tahun = null)
+    {
+        if ($tahun && !$request->has('tahun')) {
+            $request->merge(['tahun' => $tahun]);
+        }
+
+        $selectedCategory = 'dokumen-musrenbang';
+        $selectedYear = $request->get('tahun', 'all');
+        $search = $request->get('search', $request->get('q', ''));
+        $perPage = (int) $request->get('entries', $request->get('per_page', 10));
+        if (!in_array($perPage, [10, 25, 50, 100])) {
+            $perPage = 10;
+        }
+
+        $categoryVariants = ['musrenbang', 'Musrenbang', 'dokumen-musrenbang'];
+        $totalTotal = Document::whereIn('category', $categoryVariants)->count();
+        $query = $this->buildDocumentQuery($request, $categoryVariants);
+        $documents = $query->paginate($perPage)->withQueryString();
+
+        $categories = Category::where('module', 'dokumen')
+            ->where('status', 'aktif')
+            ->orderBy('order', 'asc')
+            ->get();
+
+        $availableYears = $this->getAvailableYears();
+        $pageTitle = 'Hasil Musrenbang & Perencanaan Pembangunan';
+
+        return view('documents.musrenbang', compact(
+            'documents', 'categories', 'availableYears', 'selectedCategory', 
+            'selectedYear', 'search', 'perPage', 'totalTotal', 'pageTitle'
+        ));
+    }
+
+    public function renstraRenja(Request $request, $tahun = null)
+    {
+        if ($tahun && !$request->has('tahun')) {
+            $request->merge(['tahun' => $tahun]);
+        }
+
+        $selectedCategory = 'dokumen-renstra-renja';
+        $selectedYear = $request->get('tahun', 'all');
+        $search = $request->get('search', $request->get('q', ''));
+        $perPage = (int) $request->get('entries', $request->get('per_page', 10));
+        if (!in_array($perPage, [10, 25, 50, 100])) {
+            $perPage = 10;
+        }
+
+        $categoryVariants = ['renstra_renja', 'renstra-renja', 'Renstra & Renja', 'dokumen-renstra-renja'];
+        $totalTotal = Document::whereIn('category', $categoryVariants)->count();
+        $query = $this->buildDocumentQuery($request, $categoryVariants);
+        $documents = $query->paginate($perPage)->withQueryString();
+
+        $categories = Category::where('module', 'dokumen')
+            ->where('status', 'aktif')
+            ->orderBy('order', 'asc')
+            ->get();
+
+        $availableYears = $this->getAvailableYears();
+        $pageTitle = 'Dokumen Perencanaan Kinerja (Renstra & Renja)';
+
+        return view('documents.renstra_renja', compact(
+            'documents', 'categories', 'availableYears', 'selectedCategory', 
+            'selectedYear', 'search', 'perPage', 'totalTotal', 'pageTitle'
+        ));
+    }
+
+    public function skKelembagaan(Request $request, $tahun = null)
+    {
+        if ($tahun && !$request->has('tahun')) {
+            $request->merge(['tahun' => $tahun]);
+        }
+
+        $selectedCategory = 'dokumen-sk-kelembagaan';
+        $selectedYear = $request->get('tahun', 'all');
+        $search = $request->get('search', $request->get('q', ''));
+        $perPage = (int) $request->get('entries', $request->get('per_page', 10));
+        if (!in_array($perPage, [10, 25, 50, 100])) {
+            $perPage = 10;
+        }
+
+        $categoryVariants = ['sk_kelembagaan', 'sk-kelembagaan', 'SK Kelembagaan', 'dokumen-sk-kelembagaan'];
+        $totalTotal = Document::whereIn('category', $categoryVariants)->count();
+        $query = $this->buildDocumentQuery($request, $categoryVariants);
+        $documents = $query->paginate($perPage)->withQueryString();
+
+        $categories = Category::where('module', 'dokumen')
+            ->where('status', 'aktif')
+            ->orderBy('order', 'asc')
+            ->get();
+
+        $availableYears = $this->getAvailableYears();
+        $pageTitle = 'SK Kelembagaan & Legalitas Kelurahan';
+
+        return view('documents.sk_kelembagaan', compact(
+            'documents', 'categories', 'availableYears', 'selectedCategory', 
+            'selectedYear', 'search', 'perPage', 'totalTotal', 'pageTitle'
+        ));
+    }
+
+    private function getCategoryVariants($selectedCategory)
+    {
+        $variants = [
+            $selectedCategory,
+            Str::slug($selectedCategory),
+            str_replace('-', '_', Str::slug($selectedCategory)),
+            str_replace('dokumen-', '', $selectedCategory),
+            str_replace('-', '_', str_replace('dokumen-', '', $selectedCategory)),
+        ];
+
+        $catObj = Category::where('module', 'dokumen')
+            ->where(function ($c) use ($selectedCategory, $variants) {
+                $c->whereIn('slug', $variants)->orWhereIn('name', $variants);
+            })->first();
+
+        if ($catObj) {
+            $variants[] = $catObj->slug;
+            $variants[] = $catObj->name;
+            $variants[] = Str::slug($catObj->name);
+            $variants[] = str_replace('-', '_', Str::slug($catObj->name));
+            $variants[] = str_replace('dokumen-', '', $catObj->slug);
+            $variants[] = str_replace('-', '_', str_replace('dokumen-', '', $catObj->slug));
+        }
+
+        return array_values(array_unique(array_filter($variants)));
     }
 
     /**
-     * Halaman Renstra & Renja
+     * Preview / Lihat Berkas PDF Public (Inline Viewer)
      */
-    public function renstraRenja()
+    public function view(Document $document)
     {
-        $dbDocs = Document::where('category', 'renstra_renja')->latest()->get();
-
-        if ($dbDocs->count() > 0) {
-            $renstraList = $dbDocs->map(function ($doc) {
-                return [
-                    'id' => $doc->id,
-                    'title' => $doc->title,
-                    'period' => 'Tahun ' . ($doc->published_date ? $doc->published_date->format('Y') : $doc->created_at->format('Y')),
-                    'description' => $doc->description,
-                    'file_name' => $doc->file_name,
-                    'file_size' => $doc->file_size,
-                    'date' => $doc->published_date ? $doc->published_date->translatedFormat('d M Y') : $doc->created_at->translatedFormat('d M Y'),
-                    'category' => 'Dokumen Perencanaan',
-                    'badge' => 'Resmi',
-                    'download_url' => route('documents.download', $doc->id),
-                ];
-            })->toArray();
-        } else {
-            $renstraList = [
-                [
-                    'id' => 0,
-                    'title' => 'Rencana Strategis (Renstra) Kelurahan Sidomukti',
-                    'period' => 'Periode 5 Tahunan (2024 - 2029)',
-                    'description' => 'Dokumen perencanaan jangka menengah yang memuat visi, misi, tujuan, sasaran, strategi, dan kebijakan pembangunan kelurahan selama 5 tahun.',
-                    'file_name' => 'Renstra-Kelurahan-Sidomukti-2024-2029.pdf',
-                    'file_size' => '4.5 MB',
-                    'date' => '05 Agu 2024',
-                    'category' => 'Renstra',
-                    'badge' => '5 Tahunan',
-                    'download_url' => '#',
-                ],
-                [
-                    'id' => 0,
-                    'title' => 'Rencana Kerja Tahunan (Renja) Kelurahan Sidomukti Tahun 2026',
-                    'period' => 'Tahun Anggaran 2026 (Berjalan)',
-                    'description' => 'Dokumen perencanaan tahunan kelurahan yang menjabarkan target kinerja, program prioritas, dan alokasi kegiatan untuk tahun 2026.',
-                    'file_name' => 'Renja-Kelurahan-Sidomukti-2026.pdf',
-                    'file_size' => '3.2 MB',
-                    'date' => '10 Des 2025',
-                    'category' => 'Renja',
-                    'badge' => 'Tahun 2026',
-                    'download_url' => '#',
-                ],
-            ];
+        if ($document->file_path && Storage::disk('public')->exists($document->file_path)) {
+            return response()->file(Storage::disk('public')->path($document->file_path), [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="' . ($document->file_name ?? 'dokumen.pdf') . '"'
+            ]);
         }
 
-        return view('documents.renstra_renja', compact('renstraList'));
-    }
-
-    /**
-     * Halaman SK Kelembagaan
-     */
-    public function skKelembagaan()
-    {
-        $dbDocs = Document::where('category', 'sk_kelembagaan')->latest()->get();
-
-        if ($dbDocs->count() > 0) {
-            $skList = $dbDocs->map(function ($doc) {
-                return [
-                    'id' => $doc->id,
-                    'title' => $doc->title,
-                    'sk_number' => 'SK Resmi Kelurahan',
-                    'period' => 'Berlaku Berjalan',
-                    'description' => $doc->description,
-                    'file_name' => $doc->file_name,
-                    'file_size' => $doc->file_size,
-                    'date' => $doc->published_date ? $doc->published_date->translatedFormat('d M Y') : $doc->created_at->translatedFormat('d M Y'),
-                    'organization' => $doc->organization ?? 'Lembaga Kelurahan',
-                    'theme' => 'emerald',
-                    'download_url' => route('documents.download', $doc->id),
-                ];
-            })->toArray();
-        } else {
-            $skList = [
-                [
-                    'id' => 0,
-                    'title' => 'SK Kepengurusan RT / RW Periode Berjalan',
-                    'sk_number' => 'SK Lurah No: 188/04/426.115/2025',
-                    'period' => 'Masa Bakti: 2025 - 2030',
-                    'description' => 'Keputusan Lurah Sidomukti tentang Penetapan dan Pengesahan Pengurus Rukun Tetangga (RT) dan Rukun Warga (RW) se-Kelurahan Sidomukti.',
-                    'file_name' => 'SK-Kepengurusan-RTRW-Sidomukti.pdf',
-                    'file_size' => '2.6 MB',
-                    'date' => '02 Jan 2025',
-                    'organization' => 'RT / RW',
-                    'theme' => 'blue',
-                    'download_url' => '#',
-                ],
-            ];
+        if (filter_var($document->file_path, FILTER_VALIDATE_URL)) {
+            return redirect()->away($document->file_path);
         }
 
-        return view('documents.sk_kelembagaan', compact('skList'));
+        return redirect()->back()->with('error', 'Dokumen PDF belum diunggah atau tidak ditemukan.');
     }
 
     /**

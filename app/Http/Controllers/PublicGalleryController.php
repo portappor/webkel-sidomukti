@@ -3,34 +3,47 @@
 namespace App\Http\Controllers;
 
 use App\Models\Album;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class PublicGalleryController extends Controller
 {
     public function index(Request $request)
     {
-        $category = $request->query('category', 'all');
-        
-        $query = Album::withCount('photos')->latest();
-        if ($category !== 'all') {
-            $query->where('category', $category);
+        $selectedCategory = $request->query('category', 'all');
+        $categories = Category::where('module', 'galeri')->where('status', 'aktif')->orderBy('order')->orderBy('name')->get();
+        if ($categories->isEmpty()) {
+            $categories = Category::where('status', 'aktif')->orderBy('name')->get();
         }
 
-        $albums = $query->paginate(12);
+        $query = Album::withCount('photos')->latest();
+        if ($selectedCategory !== 'all') {
+            $cat = $categories->firstWhere('slug', $selectedCategory) ?? Category::where('slug', $selectedCategory)->first();
+            if ($cat) {
+                $query->where(function($q) use ($cat, $selectedCategory) {
+                    $q->where('category', $cat->slug)
+                      ->orWhere('category', $cat->name)
+                      ->orWhere('category', $selectedCategory);
+                });
+            } else {
+                $query->where('category', $selectedCategory);
+            }
+        }
 
-        return view('galleries.index', compact('albums', 'category'));
+        $albums = $query->paginate(12)->withQueryString();
+
+        return view('galleries.index', compact('albums', 'categories', 'selectedCategory'));
     }
 
-    public function show($slug)
+    public function show(Request $request, $slug)
     {
         $album = Album::with('photos')->where('slug', $slug)->firstOrFail();
         
-        $relatedAlbums = Album::where('id', '!=', $album->id)
-            ->where('category', $album->category)
+        $otherAlbums = Album::withCount('photos')
+            ->where('id', '!=', $album->id)
             ->latest()
-            ->take(4)
             ->get();
 
-        return view('galleries.show', compact('album', 'relatedAlbums'));
+        return view('galleries.show', compact('album', 'otherAlbums'));
     }
 }

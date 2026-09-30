@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\HasFileCleanup;
 
 class Document extends Model
 {
-    use HasFactory;
+    use HasFactory, HasFileCleanup;
+
+    protected array $fileAttributes = ['file_path'];
 
     protected $fillable = [
         'title',
@@ -29,11 +32,30 @@ class Document extends Model
 
     public function getCategoryLabelAttribute()
     {
-        return match ($this->category) {
+        $categoryValue = $this->category;
+        $variants = [
+            $categoryValue,
+            Str::slug($categoryValue),
+            str_replace('-', '_', Str::slug($categoryValue)),
+            'dokumen-' . Str::slug($categoryValue),
+            str_replace('dokumen-', '', $categoryValue),
+            str_replace('_', '-', str_replace('dokumen-', '', $categoryValue)),
+        ];
+
+        $categoryModel = \App\Models\Category::where('module', 'dokumen')
+            ->where(function ($q) use ($variants) {
+                $q->whereIn('slug', $variants)->orWhereIn('name', $variants);
+            })->first();
+
+        if ($categoryModel) {
+            return $categoryModel->name;
+        }
+
+        return match ($categoryValue) {
             'musrenbang' => 'Musrenbang',
-            'renstra_renja' => 'Renstra & Renja',
-            'sk_kelembagaan' => 'SK Kelembagaan',
-            default => ucfirst($this->category),
+            'renstra_renja', 'renstra-renja' => 'Renstra & Renja',
+            'sk_kelembagaan', 'sk-kelembagaan' => 'SK Kelembagaan',
+            default => ucfirst(str_replace(['dokumen-', '_', '-'], [' ', ' ', ' '], $categoryValue)),
         };
     }
 
