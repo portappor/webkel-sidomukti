@@ -83,11 +83,11 @@
          x-cloak>
 
         <!-- Background Image -->
-        <img src="{{ $slide['bg'] }}" class="absolute inset-0 w-full h-full object-cover object-center opacity-90 transition-all duration-700" alt="{{ strip_tags($slide['title_1']) }}">
+        <img src="{{ $slide['bg'] }}" class="absolute inset-0 w-full h-full object-cover object-center opacity-100 transition-all duration-700" alt="{{ strip_tags($slide['title_1']) }}">
 
         <!-- Smooth Soft Gradient Overlay -->
-        <div class="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/50 to-transparent"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-slate-950/20"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-950/60 via-slate-950/20 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-slate-950/10"></div>
 
         <div class="container mx-auto px-4 h-full relative z-10 flex items-center">
             <div class="w-full md:w-2/3 lg:w-1/2 text-white">
@@ -141,11 +141,11 @@
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 mt-4 md:mt-6 mb-6">
 <section class="relative bg-slate-950 h-[520px] md:h-[600px] w-full overflow-hidden rounded-2xl shadow-2xl">
     <!-- Background Image -->
-    <img src="{{ $staticSlide['bg'] }}" class="absolute inset-0 w-full h-full object-cover object-center opacity-95 transition-opacity duration-500" alt="Pelayanan Publik Digital Kelurahan Sidomukti">
+    <img src="{{ $staticSlide['bg'] }}" class="absolute inset-0 w-full h-full object-cover object-center opacity-100 transition-opacity duration-500" alt="Pelayanan Publik Digital Kelurahan Sidomukti">
 
     <!-- Smooth Soft Gradient Overlay -->
-    <div class="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/45 to-transparent"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-slate-950/20"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-slate-950/60 via-slate-950/20 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-slate-950/10"></div>
 
     <div class="container mx-auto px-4 h-full relative z-10 flex items-center">
         <div class="w-full md:w-2/3 lg:w-1/2 text-white">
@@ -308,42 +308,42 @@
 <section class="relative z-20 py-12 bg-slate-50 border-t border-slate-100">
     <div class="container mx-auto px-4">
         <div class="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden flex flex-col items-center">
-            <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-0 p-6 md:p-0 md:divide-x divide-slate-100">
-                <div class="md:p-6 text-center group reveal fade-up" data-delay="0">
-                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-green-50 text-green-600 mb-3 group-hover:bg-green-600 group-hover:text-white transition-all duration-300">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            <div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 md:gap-0 p-3 sm:p-6 md:p-0 md:divide-x divide-slate-100">
+                <div class="p-2 md:p-6 text-center group reveal fade-up" data-delay="0">
+                    <div class="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-green-50 text-green-600 mb-1 sm:mb-3 group-hover:bg-green-600 group-hover:text-white transition-all duration-300">
+                        <svg class="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     </div>
-                    <div class="text-2xl md:text-3xl font-extrabold text-slate-800" data-count-to="{{ $settings['demografi_total'] ?? ($settings['jumlah_penduduk'] ?? '2776') }}" data-count-suffix="">0</div>
-                    <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider mt-1">Jumlah Penduduk</p>
+                    <div class="text-base sm:text-2xl md:text-3xl font-extrabold text-slate-800" data-count-to="{{ $settings['demografi_total'] ?? ($settings['jumlah_penduduk'] ?? '2776') }}" data-count-suffix="">0</div>
+                    <p class="text-[8px] sm:text-xs text-slate-500 font-semibold uppercase tracking-wider mt-0.5 sm:mt-1">Jumlah Penduduk</p>
                 </div>
-                <div class="md:p-6 text-center group reveal fade-up" data-delay="100">
-                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-50 text-blue-600 mb-3 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                <div class="p-2 md:p-6 text-center group reveal fade-up" data-delay="100">
+                    <div class="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-blue-50 text-blue-600 mb-1 sm:mb-3 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                        <svg class="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     </div>
-                    <div class="text-2xl md:text-3xl font-extrabold text-slate-800" data-count-to="{{ $settings['demografi_kk'] ?? '850' }}" data-count-suffix="">0</div>
-                    <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider mt-1">Kepala Keluarga (KK)</p>
+                    <div class="text-base sm:text-2xl md:text-3xl font-extrabold text-slate-800" data-count-to="{{ $settings['demografi_kk'] ?? '850' }}" data-count-suffix="">0</div>
+                    <p class="text-[8px] sm:text-xs text-slate-500 font-semibold uppercase tracking-wider mt-0.5 sm:mt-1">Kepala Keluarga (KK)</p>
                 </div>
-                <div class="md:p-6 text-center group reveal fade-up" data-delay="200">
-                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 mb-3 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                <div class="p-2 md:p-6 text-center group reveal fade-up" data-delay="200">
+                    <div class="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-indigo-50 text-indigo-600 mb-1 sm:mb-3 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+                        <svg class="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                     </div>
-                    <div class="text-2xl md:text-3xl font-extrabold text-slate-800" data-count-to="{{ $settings['demografi_laki'] ?? '1402' }}" data-count-suffix="">0</div>
-                    <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider mt-1">Laki-Laki</p>
+                    <div class="text-base sm:text-2xl md:text-3xl font-extrabold text-slate-800" data-count-to="{{ $settings['demografi_laki'] ?? '1402' }}" data-count-suffix="">0</div>
+                    <p class="text-[8px] sm:text-xs text-slate-500 font-semibold uppercase tracking-wider mt-0.5 sm:mt-1">Laki-Laki</p>
                 </div>
-                <div class="md:p-6 text-center group reveal fade-up" data-delay="300">
-                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-pink-50 text-pink-600 mb-3 group-hover:bg-pink-600 group-hover:text-white transition-all duration-300">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                <div class="p-2 md:p-6 text-center group reveal fade-up" data-delay="300">
+                    <div class="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-pink-50 text-pink-600 mb-1 sm:mb-3 group-hover:bg-pink-600 group-hover:text-white transition-all duration-300">
+                        <svg class="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                     </div>
-                    <div class="text-2xl md:text-3xl font-extrabold text-slate-800" data-count-to="{{ $settings['demografi_perempuan'] ?? '1374' }}" data-count-suffix="">0</div>
-                    <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider mt-1">Perempuan</p>
+                    <div class="text-base sm:text-2xl md:text-3xl font-extrabold text-slate-800" data-count-to="{{ $settings['demografi_perempuan'] ?? '1374' }}" data-count-suffix="">0</div>
+                    <p class="text-[8px] sm:text-xs text-slate-500 font-semibold uppercase tracking-wider mt-0.5 sm:mt-1">Perempuan</p>
                 </div>
             </div>
 
             <!-- Tombol Selengkapnya ke Statistik & Monografi -->
-            <div class="w-full py-3.5 px-6 text-center border-t border-slate-100 bg-slate-50/70 flex items-center justify-center reveal fade-up" data-delay="400">
-                <a href="{{ route('profil.demografi') }}" class="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-[#008c5f] hover:bg-[#00734e] text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group cursor-pointer">
+            <div class="w-full py-2.5 sm:py-3.5 px-3 sm:px-6 text-center border-t border-slate-100 bg-slate-50/70 flex items-center justify-center reveal fade-up" data-delay="400">
+                <a href="{{ route('profil.demografi') }}" class="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2 sm:py-2.5 bg-[#008c5f] hover:bg-[#00734e] text-white font-extrabold text-[8px] sm:text-xs uppercase tracking-wider rounded-lg sm:rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group cursor-pointer text-center max-w-full">
                     <span>Lihat Selengkapnya Statistik & Monografi</span>
-                    <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    <svg class="w-3 h-3 sm:w-4 sm:h-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </a>
             </div>
         </div>
@@ -435,32 +435,32 @@
                     </div>
 
                     @if(isset($posts) && $posts->count() > 0)
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div class="grid grid-cols-2 gap-2 sm:gap-5">
                         @foreach($posts->take(4) as $index => $post)
                         <article class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden hover:shadow-xl transition duration-300 group flex flex-col h-full reveal fade-up" data-delay="{{ $index * 80 }}">
-                            <div class="relative h-40 overflow-hidden bg-slate-200 shrink-0">
+                            <div class="relative h-24 sm:h-40 overflow-hidden bg-slate-200 shrink-0">
                                 <img src="{{ $post->thumbnail_url }}" alt="{{ $post->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                                <div class="absolute top-3 left-3 flex flex-col text-center shadow-lg rounded-lg overflow-hidden">
-                                    <span class="bg-green-600 text-white font-extrabold text-base px-2.5 py-0.5">{{ \Carbon\Carbon::parse($post->published_at)->format('d') }}</span>
-                                    <span class="bg-white text-slate-800 text-[9px] font-bold uppercase px-2 py-0.5 leading-none tracking-wider">{{ \Carbon\Carbon::parse($post->published_at)->format('M Y') }}</span>
+                                <div class="absolute top-1.5 left-1.5 sm:top-3 sm:left-3 flex flex-col text-center shadow-lg rounded-lg overflow-hidden">
+                                    <span class="bg-green-600 text-white font-extrabold text-[10px] sm:text-base px-1.5 sm:px-2.5 py-0.5">{{ \Carbon\Carbon::parse($post->published_at)->format('d') }}</span>
+                                    <span class="bg-white text-slate-800 text-[7px] sm:text-[9px] font-bold uppercase px-1 sm:px-2 py-0.5 leading-none tracking-wider">{{ \Carbon\Carbon::parse($post->published_at)->format('M Y') }}</span>
                                 </div>
                                 @if($index === 0)
-                                <div class="absolute top-3 right-3">
-                                    <span class="bg-yellow-500 text-slate-900 text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider shadow">Terbaru</span>
+                                <div class="absolute top-1.5 right-1.5 sm:top-3 sm:right-3">
+                                    <span class="bg-yellow-500 text-slate-900 text-[7px] sm:text-[9px] font-extrabold px-1 sm:px-2 py-0.5 rounded-full uppercase tracking-wider shadow">Terbaru</span>
                                 </div>
                                 @endif
                             </div>
-                            <div class="p-4 flex flex-col flex-grow">
-                                <span class="inline-flex items-center gap-1 text-[10px] font-bold text-green-600 uppercase tracking-wider mb-1.5">
+                            <div class="p-2 sm:p-4 flex flex-col flex-grow">
+                                <span class="inline-flex items-center gap-1 text-[7px] sm:text-[10px] font-bold text-green-600 uppercase tracking-wider mb-1 sm:mb-1.5">
                                     <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> {{ $post->category_name }}
                                 </span>
                                 <a href="{{ route('posts.show', $post->slug) }}">
-                                    <h3 class="font-bold text-sm text-slate-800 leading-snug mb-2 group-hover:text-green-700 transition line-clamp-2">{{ $post->title }}</h3>
+                                    <h3 class="font-bold text-[10px] sm:text-sm text-slate-800 leading-snug mb-1 sm:mb-2 group-hover:text-green-700 transition line-clamp-2">{{ $post->title }}</h3>
                                 </a>
-                                <p class="text-xs text-slate-500 line-clamp-2 mb-3 flex-grow leading-relaxed">{{ Str::limit(strip_tags(html_entity_decode($post->excerpt ?? $post->content)), 75) }}</p>
-                                <div class="mt-auto pt-2.5 border-t border-slate-100 flex items-center justify-between">
-                                    <a href="{{ route('posts.show', $post->slug) }}" class="inline-flex items-center gap-1 text-xs font-bold text-green-600 hover:text-green-700 transition">
-                                        Baca Selengkapnya <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                <p class="text-[8px] sm:text-xs text-slate-500 line-clamp-2 mb-2 sm:mb-3 flex-grow leading-relaxed">{{ Str::limit(strip_tags(html_entity_decode($post->excerpt ?? $post->content)), 75) }}</p>
+                                <div class="mt-auto pt-2 sm:pt-2.5 border-t border-slate-100 flex items-center justify-between">
+                                    <a href="{{ route('posts.show', $post->slug) }}" class="inline-flex items-center gap-1 text-[9px] sm:text-xs font-bold text-green-600 hover:text-green-700 transition">
+                                        Baca Selengkapnya <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                     </a>
                                 </div>
                             </div>
@@ -468,24 +468,24 @@
                         @endforeach
                     </div>
                     @else
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div class="grid grid-cols-2 gap-2 sm:gap-5">
                         @foreach([1, 2, 3, 4] as $index => $i)
                         <article class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden hover:shadow-xl transition duration-300 group flex flex-col h-full reveal fade-up" data-delay="{{ $index * 80 }}">
-                            <div class="relative h-40 overflow-hidden bg-slate-200 shrink-0">
+                            <div class="relative h-24 sm:h-40 overflow-hidden bg-slate-200 shrink-0">
                                 <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=600&auto=format&fit=crop&sig={{$i}}" alt="Berita Dummy" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                                <div class="absolute top-3 left-3 flex flex-col text-center shadow-lg rounded-lg overflow-hidden">
-                                    <span class="bg-green-600 text-white font-extrabold text-base px-2.5 py-0.5">{{ 10 + $i }}</span>
-                                    <span class="bg-white text-slate-800 text-[9px] font-bold uppercase px-2 py-0.5 leading-none tracking-wider">Sep 2026</span>
+                                <div class="absolute top-1.5 left-1.5 sm:top-3 sm:left-3 flex flex-col text-center shadow-lg rounded-lg overflow-hidden">
+                                    <span class="bg-green-600 text-white font-extrabold text-[10px] sm:text-base px-1.5 sm:px-2.5 py-0.5">{{ 10 + $i }}</span>
+                                    <span class="bg-white text-slate-800 text-[7px] sm:text-[9px] font-bold uppercase px-1 sm:px-2 py-0.5 leading-none tracking-wider">Sep 2026</span>
                                 </div>
                             </div>
-                            <div class="p-4 flex flex-col flex-grow">
-                                <span class="inline-flex items-center gap-1 text-[10px] font-bold text-green-600 uppercase tracking-wider mb-1.5">
+                            <div class="p-2 sm:p-4 flex flex-col flex-grow">
+                                <span class="inline-flex items-center gap-1 text-[7px] sm:text-[10px] font-bold text-green-600 uppercase tracking-wider mb-1 sm:mb-1.5">
                                     <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Informasi Publik
                                 </span>
-                                <a href="#"><h3 class="font-bold text-sm text-slate-800 leading-snug mb-2 group-hover:text-green-700 transition line-clamp-2">Rapat Koordinasi Kelurahan Terkait Pelayanan {{$i}}</h3></a>
-                                <p class="text-xs text-slate-500 line-clamp-2 mb-3 flex-grow leading-relaxed">Kelurahan Sidomukti mengadakan rapat koordinasi bersama tokoh masyarakat...</p>
-                                <div class="mt-auto pt-2.5 border-t border-slate-100">
-                                    <a href="#" class="inline-flex items-center gap-1 text-xs font-bold text-green-600 hover:text-green-800 transition">Baca Selengkapnya <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
+                                <a href="#"><h3 class="font-bold text-[10px] sm:text-sm text-slate-800 leading-snug mb-1 sm:mb-2 group-hover:text-green-700 transition line-clamp-2">Rapat Koordinasi Kelurahan Terkait Pelayanan {{$i}}</h3></a>
+                                <p class="text-[8px] sm:text-xs text-slate-500 line-clamp-2 mb-2 sm:mb-3 flex-grow leading-relaxed">Kelurahan Sidomukti mengadakan rapat koordinasi bersama tokoh masyarakat...</p>
+                                <div class="mt-auto pt-2 sm:pt-2.5 border-t border-slate-100">
+                                    <a href="#" class="inline-flex items-center gap-1 text-[9px] sm:text-xs font-bold text-green-600 hover:text-green-800 transition">Baca Selengkapnya <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
                                 </div>
                             </div>
                         </article>
@@ -584,7 +584,7 @@
                 <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Galeri Album & Video Kegiatan</h2>
                 <p class="text-slate-500 mt-2 text-sm sm:text-base font-medium max-w-xl">Dokumentasi resmi foto program serta video kegiatan warga Kelurahan Sidomukti.</p>
             </div>
-            <div class="flex flex-wrap items-center gap-3 mt-5 md:mt-0">
+            <div class="hidden md:flex flex-wrap items-center gap-3 mt-5 md:mt-0">
                 <a href="{{ route('galleries.index') }}" class="inline-flex items-center gap-2 text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 px-4 py-2.5 rounded-xl transition-all shadow-xs hover:shadow group">
                     <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                     <span>Semua Album Foto</span>
@@ -598,7 +598,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6">
             <!-- 1. DUA ALBUM FOTO (2 Cards) -->
             @php
                 $albumsList = (isset($galleries) && $galleries->count() > 0) ? $galleries->take(2) : collect([]);
@@ -622,16 +622,16 @@
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
 
                             <!-- Category Badge Top-Left -->
-                            <div class="absolute top-3 left-3 z-10">
-                                <span class="px-2.5 py-1 bg-slate-900/80 backdrop-blur-md text-emerald-400 text-[10px] font-bold uppercase tracking-wider rounded-lg border border-slate-700/80 shadow-xs">
+                            <div class="absolute top-1.5 left-1.5 sm:top-3 sm:left-3 z-10">
+                                <span class="px-1.5 py-0.5 sm:px-2.5 sm:py-1 bg-slate-900/80 backdrop-blur-md text-emerald-400 text-[7px] sm:text-[10px] font-bold uppercase tracking-wider rounded-md sm:rounded-lg border border-slate-700/80 shadow-xs">
                                     {{ ucfirst($gallery->category ?? 'Pemberdayaan') }}
                                 </span>
                             </div>
 
                             <!-- Count Badge Bottom-Right -->
-                            <div class="absolute bottom-3 right-3 z-10">
-                                <span class="px-2.5 py-1 bg-emerald-600/90 backdrop-blur-md text-white text-[11px] font-bold rounded-lg shadow-md flex items-center gap-1 border border-white/20">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <div class="absolute bottom-1.5 right-1.5 sm:bottom-3 sm:right-3 z-10">
+                                <span class="px-1.5 py-0.5 sm:px-2.5 sm:py-1 bg-emerald-600/90 backdrop-blur-md text-white text-[8px] sm:text-[11px] font-bold rounded-md sm:rounded-lg shadow-md flex items-center gap-1 border border-white/20">
+                                    <svg class="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                     {{ $photoCount }} Foto
                                 </span>
                             </div>
@@ -646,34 +646,34 @@
                         </div>
 
                         <!-- Content Info -->
-                        <div class="p-5">
+                        <div class="p-2 sm:p-5">
                             @if($albumSlug)
                             <a href="{{ route('galleries.show', $albumSlug) }}">
-                                <h3 class="font-bold text-base text-slate-900 leading-snug group-hover:text-emerald-700 transition line-clamp-2 mb-2">
+                                <h3 class="font-bold text-xs sm:text-base text-slate-900 leading-snug group-hover:text-emerald-700 transition line-clamp-2 mb-1 sm:mb-2">
                                     {{ $gallery->title }}
                                 </h3>
                             </a>
                             @else
-                            <h3 class="font-bold text-base text-slate-900 leading-snug group-hover:text-emerald-700 transition line-clamp-2 mb-2">
+                            <h3 class="font-bold text-xs sm:text-base text-slate-900 leading-snug group-hover:text-emerald-700 transition line-clamp-2 mb-1 sm:mb-2">
                                 {{ $gallery->title }}
                             </h3>
                             @endif
-                            <p class="text-xs text-slate-500 font-normal flex items-center gap-1">
-                                <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <p class="text-[9px] sm:text-xs text-slate-500 font-normal flex items-center gap-1">
+                                <svg class="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                 {{ $gallery->event_date ? \Carbon\Carbon::parse($gallery->event_date)->translatedFormat('d F Y') : 'Dokumentasi Kelurahan' }}
                             </p>
                         </div>
                     </div>
 
-                    <div class="px-5 pb-5 pt-0">
+                    <div class="px-2 pb-2 sm:px-5 sm:pb-5 pt-0">
                         <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
                             @if($albumSlug)
-                            <a href="{{ route('galleries.show', $albumSlug) }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 hover:text-emerald-700 group-hover:translate-x-1 transition-all">
+                            <a href="{{ route('galleries.show', $albumSlug) }}" class="inline-flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-xs font-bold text-emerald-600 hover:text-emerald-700 group-hover:translate-x-1 transition-all">
                                 <span>Lihat Album</span>
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                             </a>
                             @else
-                            <button @click.prevent="lightboxSrc = '{{ addslashes($coverUrl) }}'; lightboxTitle = '{{ addslashes($gallery->title) }}'; lightboxOpen = true;" class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 hover:text-emerald-700 group-hover:translate-x-1 transition-all cursor-pointer">
+                            <button @click.prevent="lightboxSrc = '{{ addslashes($coverUrl) }}'; lightboxTitle = '{{ addslashes($gallery->title) }}'; lightboxOpen = true;" class="inline-flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-xs font-bold text-emerald-600 hover:text-emerald-700 group-hover:translate-x-1 transition-all cursor-pointer">
                                 <span>Perbesar</span>
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                             </button>
@@ -694,27 +694,27 @@
                     <div>
                         <div class="relative aspect-video w-full overflow-hidden bg-slate-950">
                             <img src="{{ $dummyAlbum['img'] }}" alt="{{ $dummyAlbum['title'] }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-95">
-                            <div class="absolute top-3 left-3 z-10">
-                                <span class="px-2.5 py-1 bg-slate-900/80 backdrop-blur-md text-emerald-400 text-[10px] font-bold uppercase tracking-wider rounded-lg border border-slate-700/80">{{ $dummyAlbum['cat'] }}</span>
+                            <div class="absolute top-1.5 left-1.5 sm:top-3 sm:left-3 z-10">
+                                <span class="px-1.5 py-0.5 sm:px-2.5 sm:py-1 bg-slate-900/80 backdrop-blur-md text-emerald-400 text-[7px] sm:text-[10px] font-bold uppercase tracking-wider rounded-md sm:rounded-lg border border-slate-700/80">{{ $dummyAlbum['cat'] }}</span>
                             </div>
-                            <div class="absolute bottom-3 right-3 z-10">
-                                <span class="px-2.5 py-1 bg-emerald-600/90 backdrop-blur-md text-white text-[11px] font-bold rounded-lg shadow-md flex items-center gap-1 border border-white/20">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <div class="absolute bottom-1.5 right-1.5 sm:bottom-3 sm:right-3 z-10">
+                                <span class="px-1.5 py-0.5 sm:px-2.5 sm:py-1 bg-emerald-600/90 backdrop-blur-md text-white text-[8px] sm:text-[11px] font-bold rounded-md sm:rounded-lg shadow-md flex items-center gap-1 border border-white/20">
+                                    <svg class="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                     4 Foto
                                 </span>
                             </div>
                         </div>
-                        <div class="p-5">
-                            <h3 class="font-bold text-base text-slate-900 leading-snug group-hover:text-emerald-700 transition line-clamp-2 mb-2">{{ $dummyAlbum['title'] }}</h3>
-                            <p class="text-xs text-slate-500 font-normal flex items-center gap-1">
-                                <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <div class="p-2 sm:p-5">
+                            <h3 class="font-bold text-xs sm:text-base text-slate-900 leading-snug group-hover:text-emerald-700 transition line-clamp-2 mb-1 sm:mb-2">{{ $dummyAlbum['title'] }}</h3>
+                            <p class="text-[9px] sm:text-xs text-slate-500 font-normal flex items-center gap-1">
+                                <svg class="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                 {{ $dummyAlbum['date'] }}
                             </p>
                         </div>
                     </div>
-                    <div class="px-5 pb-5 pt-0">
+                    <div class="px-2 pb-2 sm:px-5 sm:pb-5 pt-0">
                         <div class="pt-3 border-t border-slate-100">
-                            <button @click.prevent="lightboxSrc = '{{ addslashes($dummyAlbum['img']) }}'; lightboxTitle = '{{ addslashes($dummyAlbum['title']) }}'; lightboxOpen = true;" class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 hover:text-emerald-700 group-hover:translate-x-1 transition-all cursor-pointer">
+                            <button @click.prevent="lightboxSrc = '{{ addslashes($dummyAlbum['img']) }}'; lightboxTitle = '{{ addslashes($dummyAlbum['title']) }}'; lightboxOpen = true;" class="inline-flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-xs font-bold text-emerald-600 hover:text-emerald-700 group-hover:translate-x-1 transition-all cursor-pointer">
                                 <span>Perbesar Cover</span>
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                             </button>
@@ -746,43 +746,43 @@
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
 
                             <!-- Category Badge Top-Left -->
-                            <div class="absolute top-3 left-3 z-10">
-                                <span class="px-2.5 py-1 bg-rose-600/90 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider rounded-lg border border-rose-400/40 shadow-xs flex items-center gap-1">
-                                    <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            <div class="absolute top-1.5 left-1.5 sm:top-3 sm:left-3 z-10">
+                                <span class="px-1.5 py-0.5 sm:px-2.5 sm:py-1 bg-rose-600/90 backdrop-blur-md text-white text-[7px] sm:text-[10px] font-bold uppercase tracking-wider rounded-md sm:rounded-lg border border-rose-400/40 shadow-xs flex items-center gap-1">
+                                    <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                     {{ ucfirst($video->category ?? 'Video Kegiatan') }}
                                 </span>
                             </div>
 
                             <!-- Duration Badge Bottom-Right -->
-                            <div class="absolute bottom-3 right-3 z-10">
-                                <span class="px-2.5 py-1 bg-slate-900/90 backdrop-blur-md text-slate-200 text-[10px] font-bold rounded-lg border border-slate-700/80 shadow-xs">
+                            <div class="absolute bottom-1.5 right-1.5 sm:bottom-3 sm:right-3 z-10">
+                                <span class="px-1.5 py-0.5 sm:px-2.5 sm:py-1 bg-slate-900/90 backdrop-blur-md text-slate-200 text-[7px] sm:text-[10px] font-bold rounded-md sm:rounded-lg border border-slate-700/80 shadow-xs">
                                     {{ $video->duration ?? 'Video Dok.' }}
                                 </span>
                             </div>
 
                             <!-- Center Glowing Play Icon -->
                             <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-12 h-12 rounded-full bg-rose-600 text-white shadow-lg shadow-rose-600/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-rose-500 transition duration-300 border-2 border-white/90">
-                                    <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-rose-600 text-white shadow-lg shadow-rose-600/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-rose-500 transition duration-300 border border-white/90 sm:border-2">
+                                    <svg class="w-3.5 h-3.5 sm:w-5 sm:h-5 fill-current ml-0.5 sm:ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Content Info -->
-                        <div class="p-5">
-                            <h3 @click="videoEmbedUrl = '{{ addslashes($vEmbed) }}'; videoTitle = '{{ addslashes($video->title) }}'; videoOpen = true;" class="font-bold text-base text-slate-900 leading-snug group-hover:text-rose-600 transition line-clamp-2 mb-2 cursor-pointer">
+                        <div class="p-2 sm:p-5">
+                            <h3 @click="videoEmbedUrl = '{{ addslashes($vEmbed) }}'; videoTitle = '{{ addslashes($video->title) }}'; videoOpen = true;" class="font-bold text-xs sm:text-base text-slate-900 leading-snug group-hover:text-rose-600 transition line-clamp-2 mb-1 sm:mb-2 cursor-pointer">
                                 {{ $video->title }}
                             </h3>
-                            <p class="text-xs text-slate-500 font-normal line-clamp-1">
+                            <p class="text-[9px] sm:text-xs text-slate-500 font-normal line-clamp-1 sm:line-clamp-2">
                                 {{ $video->description ?? 'Video Liputan Resmi Kelurahan Sidomukti' }}
                             </p>
                         </div>
                     </div>
 
-                    <div class="px-5 pb-5 pt-0">
-                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                            <button type="button" @click="videoEmbedUrl = '{{ addslashes($vEmbed) }}'; videoTitle = '{{ addslashes($video->title) }}'; videoOpen = true;" class="inline-flex items-center gap-1.5 text-xs font-bold text-rose-600 hover:text-rose-700 group-hover:translate-x-1 transition-all cursor-pointer">
-                                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <div class="px-2 pb-2 sm:px-5 sm:pb-5 pt-0">
+                        <div class="pt-2 sm:pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <button type="button" @click="videoEmbedUrl = '{{ addslashes($vEmbed) }}'; videoTitle = '{{ addslashes($video->title) }}'; videoOpen = true;" class="inline-flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-xs font-bold text-rose-600 hover:text-rose-700 group-hover:translate-x-1 transition-all cursor-pointer">
+                                <svg class="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                 <span>Putar Video</span>
                             </button>
                         </div>
@@ -803,38 +803,38 @@
                             <img src="{{ $dummyVid['thumb'] }}" alt="{{ $dummyVid['title'] }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
 
-                            <div class="absolute top-3 left-3 z-10">
-                                <span class="px-2.5 py-1 bg-rose-600/90 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider rounded-lg border border-rose-400/40 shadow-xs flex items-center gap-1">
-                                    <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            <div class="absolute top-1.5 left-1.5 sm:top-3 sm:left-3 z-10">
+                                <span class="px-1.5 py-0.5 sm:px-2.5 sm:py-1 bg-rose-600/90 backdrop-blur-md text-white text-[7px] sm:text-[10px] font-bold uppercase tracking-wider rounded-md sm:rounded-lg border border-rose-400/40 shadow-xs flex items-center gap-1">
+                                    <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                     {{ $dummyVid['cat'] }}
                                 </span>
                             </div>
 
-                            <div class="absolute bottom-3 right-3 z-10">
-                                <span class="px-2.5 py-1 bg-slate-900/90 backdrop-blur-md text-slate-200 text-[10px] font-bold rounded-lg border border-slate-700/80 shadow-xs">
+                            <div class="absolute bottom-1.5 right-1.5 sm:bottom-3 sm:right-3 z-10">
+                                <span class="px-1.5 py-0.5 sm:px-2.5 sm:py-1 bg-slate-900/90 backdrop-blur-md text-slate-200 text-[7px] sm:text-[10px] font-bold rounded-md sm:rounded-lg border border-slate-700/80 shadow-xs">
                                     {{ $dummyVid['dur'] }}
                                 </span>
                             </div>
 
                             <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-12 h-12 rounded-full bg-rose-600 text-white shadow-lg shadow-rose-600/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-rose-500 transition duration-300 border-2 border-white/90">
-                                    <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-rose-600 text-white shadow-lg shadow-rose-600/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-rose-500 transition duration-300 border border-white/90 sm:border-2">
+                                    <svg class="w-3.5 h-3.5 sm:w-5 sm:h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="p-5">
-                            <h3 @click="videoEmbedUrl = '{{ addslashes($dummyVid['embed']) }}'; videoTitle = '{{ addslashes($dummyVid['title']) }}'; videoOpen = true;" class="font-bold text-base text-slate-900 leading-snug group-hover:text-rose-600 transition line-clamp-2 mb-2 cursor-pointer">
+                        <div class="p-2 sm:p-5">
+                            <h3 @click="videoEmbedUrl = '{{ addslashes($dummyVid['embed']) }}'; videoTitle = '{{ addslashes($dummyVid['title']) }}'; videoOpen = true;" class="font-bold text-xs sm:text-base text-slate-900 leading-snug group-hover:text-rose-600 transition line-clamp-2 mb-1 sm:mb-2 cursor-pointer">
                                 {{ $dummyVid['title'] }}
                             </h3>
-                            <p class="text-xs text-slate-500 font-normal line-clamp-1">Gambaran umum pelayanan publik, tata kelola...</p>
+                            <p class="text-[9px] sm:text-xs text-slate-500 font-normal line-clamp-1 sm:line-clamp-2">Gambaran umum pelayanan publik, tata kelola...</p>
                         </div>
                     </div>
 
-                    <div class="px-5 pb-5 pt-0">
-                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                            <button type="button" @click="videoEmbedUrl = '{{ addslashes($dummyVid['embed']) }}'; videoTitle = '{{ addslashes($dummyVid['title']) }}'; videoOpen = true;" class="inline-flex items-center gap-1.5 text-xs font-bold text-rose-600 hover:text-rose-700 group-hover:translate-x-1 transition-all cursor-pointer">
-                                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <div class="px-2 pb-2 sm:px-5 sm:pb-5 pt-0">
+                        <div class="pt-2 sm:pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <button type="button" @click="videoEmbedUrl = '{{ addslashes($dummyVid['embed']) }}'; videoTitle = '{{ addslashes($dummyVid['title']) }}'; videoOpen = true;" class="inline-flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-xs font-bold text-rose-600 hover:text-rose-700 group-hover:translate-x-1 transition-all cursor-pointer">
+                                <svg class="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                 <span>Putar Video</span>
                             </button>
                         </div>
@@ -871,7 +871,7 @@
                         <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         Sinergi & Kolaborasi
                     </span>
-                    <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">Mitra Kerja & Kemitraan Strategis</h2>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">Instansi Terkait</h2>
                     <p class="text-slate-500 mt-2 font-medium text-sm leading-relaxed">
                         Kelurahan Sidomukti menjalin kerjasama berkelanjutan dengan instansi pemerintah, BUMN/BUMD, lembaga pendidikan, dan sektor swasta demi kemajuan warga.
                     </p>

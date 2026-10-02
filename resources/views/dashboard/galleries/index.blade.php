@@ -80,6 +80,29 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <template id="album_photos_template_{{ $album->id }}">
+                        @if($album->photos->count() > 0)
+                        <div class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-2">
+                            @foreach($album->photos as $photo)
+                            <div class="group relative bg-slate-200 rounded-lg overflow-hidden border border-slate-300 aspect-square">
+                                <img src="{{ $photo->image_url }}" alt="Foto Album" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center p-1">
+                                    <form action="{{ route('dashboard.galleries.photos.destroy', $photo->id) }}" method="POST" onsubmit="return confirm('Hapus foto ini dari album?');" class="w-full h-full flex items-center justify-center">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" title="Hapus Foto" class="bg-red-600 hover:bg-red-700 text-white w-7 h-7 rounded-full shadow transition flex items-center justify-center cursor-pointer">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                        @else
+                        <p class="text-[11px] text-slate-500 font-medium">Belum ada foto dalam album ini.</p>
+                        @endif
+                    </template>
                 </div>
             @endforeach
         </div>
@@ -286,6 +309,13 @@
                 </div>
 
                 <div class="border-t border-slate-100 pt-3">
+                    <label class="block text-xs font-bold text-slate-700 mb-2">Foto-Foto yang Sudah Ada di Album Ini</label>
+                    <div id="edit_existing_photos_container" class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+                <div class="border-t border-slate-100 pt-3">
                     <label class="block text-xs font-bold text-slate-700 mb-1">Tambah Foto Dokumentasi Baru ke Album</label>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
@@ -371,6 +401,13 @@ function openEditAlbumModal(id, title, category, eventDate, description, coverUr
         previewContainer.classList.remove('hidden');
     } else {
         previewContainer.classList.add('hidden');
+    }
+    
+    const photosTemplate = document.getElementById('album_photos_template_' + id);
+    if (photosTemplate) {
+        document.getElementById('edit_existing_photos_container').innerHTML = photosTemplate.innerHTML;
+    } else {
+        document.getElementById('edit_existing_photos_container').innerHTML = '';
     }
 
     openModal('editAlbumModal');

@@ -21,7 +21,7 @@
         <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200/90 space-y-4">
             <div class="flex items-center gap-2 border-b border-slate-200 pb-3">
                 <span class="w-3 h-3 rounded-full bg-slate-900"></span>
-                <h3 class="text-base font-extrabold text-slate-900 uppercase tracking-wide">1. Kepala Kelurahan (Lurah)</h3>
+                <h3 class="text-base font-extrabold text-slate-900 uppercase tracking-wide">Kepala Kelurahan (Lurah)</h3>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
@@ -78,17 +78,14 @@
         <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200/90 space-y-6">
             <div class="flex items-center gap-2 border-b border-slate-200 pb-3">
                 <span class="w-3 h-3 rounded-full bg-blue-600"></span>
-                <h3 class="text-base font-extrabold text-slate-900 uppercase tracking-wide">3. Sekretariat & Kepala Seksi (Kasi)</h3>
+                <h3 class="text-base font-extrabold text-slate-900 uppercase tracking-wide">Sekretariat & Kepala Seksi (Kasi)</h3>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 <!-- Sekretaris Kelurahan -->
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-3">
-                    <h4 class="font-bold text-sm text-slate-800 border-b pb-2 flex items-center justify-between">
-                        <span>Sekretaris Kelurahan <span class="text-[9px] font-medium text-slate-400 normal-case ml-1">(Maks 5MB)</span></span>
-                        <span class="text-[10px] text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full font-extrabold">Sekretariat</span>
-                    </h4>
+                    <label class="block text-[11px] font-bold text-slate-600 uppercase mb-2 border-b border-slate-100 pb-2">Foto <span class="text-[9px] font-medium text-slate-400 normal-case">(Maks 5MB)</span></label>
                     <div class="flex items-center gap-4">
                         @php
                             $sekVal = $settings['foto_sekretaris'] ?? '';
@@ -133,10 +130,7 @@
 
                 <!-- Kasi Pemerintahan -->
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-3">
-                    <h4 class="font-bold text-sm text-slate-800 border-b pb-2 flex items-center justify-between">
-                        <span>Kasi Pemerintahan <span class="text-[9px] font-medium text-slate-400 normal-case ml-1">(Maks 5MB)</span></span>
-                        <span class="text-[10px] text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full font-extrabold">Seksi 1</span>
-                    </h4>
+                    <label class="block text-[11px] font-bold text-slate-600 uppercase mb-2 border-b border-slate-100 pb-2">Foto <span class="text-[9px] font-medium text-slate-400 normal-case">(Maks 5MB)</span></label>
                     <div class="flex items-center gap-4">
                         @php
                             $pemVal = $settings['foto_kasi_pemerintahan'] ?? '';
@@ -181,10 +175,7 @@
 
                 <!-- Kasi Trantib -->
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-3">
-                    <h4 class="font-bold text-sm text-slate-800 border-b pb-2 flex items-center justify-between">
-                        <span>Kasi Trantib (Ketentraman & Ketertiban) <span class="text-[9px] font-medium text-slate-400 normal-case ml-1">(Maks 5MB)</span></span>
-                        <span class="text-[10px] text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full font-extrabold">Seksi 2</span>
-                    </h4>
+                    <label class="block text-[11px] font-bold text-slate-600 uppercase mb-2 border-b border-slate-100 pb-2">Foto <span class="text-[9px] font-medium text-slate-400 normal-case">(Maks 5MB)</span></label>
                     <div class="flex items-center gap-4">
                         @php
                             $trantibVal = $settings['foto_kasi_trantib'] ?? '';
@@ -229,10 +220,7 @@
 
                 <!-- Kasi Pembangunan & Kesra -->
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-3">
-                    <h4 class="font-bold text-sm text-slate-800 border-b pb-2 flex items-center justify-between">
-                        <span>Kasi Pembangunan & Kesra <span class="text-[9px] font-medium text-slate-400 normal-case ml-1">(Maks 5MB)</span></span>
-                        <span class="text-[10px] text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full font-extrabold">Seksi 3</span>
-                    </h4>
+                    <label class="block text-[11px] font-bold text-slate-600 uppercase mb-2 border-b border-slate-100 pb-2">Foto <span class="text-[9px] font-medium text-slate-400 normal-case">(Maks 5MB)</span></label>
                     <div class="flex items-center gap-4">
                         @php
                             $kesraVal = $settings['foto_kasi_kesra'] ?? '';
@@ -286,61 +274,68 @@
                     </div>
                 </div>
                 
-                <div class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-5">
                     <template x-for="(anggota, index) in listAnggota" :key="index">
-                        <div class="relative bg-white border border-slate-200/80 rounded-2xl p-4 flex flex-col md:flex-row gap-5 items-start shadow-sm transition hover:shadow-md hover:border-emerald-200 group">
+                        <div class="relative bg-white p-5 rounded-2xl border border-slate-200 space-y-3 shadow-sm transition hover:shadow-md hover:border-emerald-200 group">
                             <!-- Delete Button -->
                             <button type="button" @click="hapusAnggota(index)" class="absolute -top-2.5 -right-2.5 bg-white text-rose-400 hover:text-white hover:bg-rose-500 p-1.5 rounded-full shadow-sm border border-slate-200 hover:border-rose-500 transition z-10 opacity-0 md:group-hover:opacity-100 focus:opacity-100 max-md:opacity-100" title="Hapus Anggota">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
                             </button>
                             
+                            <label class="block text-[11px] font-bold text-slate-600 uppercase mb-2 border-b border-slate-100 pb-2">Foto <span class="text-[9px] font-medium text-slate-400 normal-case">(Maks 5MB)</span></label>
+                            
                             <!-- Photo Section -->
-                            <div class="flex flex-col items-center gap-2.5 w-full md:w-32 shrink-0">
-                                <div class="w-20 h-20 rounded-full border-2 border-slate-100 bg-slate-50 flex items-center justify-center overflow-hidden shrink-0 shadow-2xs">
+                            <div class="flex items-center gap-4">
+                                <div class="w-20 h-20 object-cover rounded-xl border border-slate-200 shrink-0 overflow-hidden flex items-center justify-center bg-slate-50 relative">
                                     <template x-if="anggota.foto && !anggota.foto_url">
-                                        <img :src="anggota.foto.startsWith('http') ? anggota.foto : '/storage/' + anggota.foto" class="w-full h-full object-cover">
+                                        <img :id="`previewFotoTambahan${index}`" :src="anggota.foto.startsWith('http') ? anggota.foto : '/storage/' + anggota.foto" class="w-full h-full object-cover">
                                     </template>
                                     <template x-if="anggota.foto_url">
-                                        <img :src="anggota.foto_url" class="w-full h-full object-cover">
+                                        <img :id="`previewFotoTambahan${index}`" :src="anggota.foto_url" class="w-full h-full object-cover">
                                     </template>
                                     <template x-if="!anggota.foto && !anggota.foto_url">
-                                        <svg class="w-8 h-8 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                        <div>
+                                            <img :id="`previewFotoTambahan${index}`" src="" class="w-full h-full object-cover absolute inset-0 hidden" @load="$event.target.classList.remove('hidden'); $event.target.nextElementSibling.classList.add('hidden')">
+                                            <svg class="w-8 h-8 text-slate-300 relative z-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                        </div>
                                     </template>
                                 </div>
-                                <div class="w-full relative text-center space-y-1.5">
+                                <div class="w-full space-y-2">
                                     <input type="hidden" :name="`aparatur_tambahan[${index}][foto_old]`" :value="anggota.foto">
-                                    <label class="cursor-pointer inline-block w-full">
-                                        <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1.5 rounded-lg hover:bg-emerald-100 border border-emerald-100 transition block shadow-2xs">Unggah Foto</span>
-                                        <input type="file" :name="`aparatur_tambahan[${index}][foto_file]`" accept="image/*" class="hidden">
-                                    </label>
-                                    <input type="url" :name="`aparatur_tambahan[${index}][foto_url]`" x-model="anggota.foto_url" @change="validateImageUrlInput($event.target)" class="w-full px-2 py-1.5 text-[10px] rounded-lg border border-slate-200 font-mono text-center placeholder-slate-400 bg-slate-50 focus:bg-white" placeholder="atau URL Foto...">
+                                    <div class="flex items-center gap-2">
+                                        <input type="file" :id="`inputFotoTambahan${index}`" :name="`aparatur_tambahan[${index}][foto_file]`" accept="image/*" data-ratio="1:1" :data-preview="`#previewFotoTambahan${index}`" class="w-full text-xs text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[11px] file:font-bold file:bg-slate-50 file:text-slate-700 hover:file:bg-slate-100 transition cursor-pointer">
+                                        <button type="button" @click="if(document.getElementById(`inputFotoTambahan${index}`).files.length){ window.CropHelper.open(document.getElementById(`inputFotoTambahan${index}`)); } else { alert('Pilih berkas foto terlebih dahulu!'); }" class="px-2 py-1 bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-800 rounded-lg border border-slate-300 text-[11px] font-bold transition shrink-0 shadow-2xs">
+                                            Potong
+                                        </button>
+                                    </div>
+                                    <input type="url" :name="`aparatur_tambahan[${index}][foto_url]`" x-model="anggota.foto_url" @change="validateImageUrlInput($event.target)" class="w-full px-2.5 py-1 text-xs rounded-lg border border-slate-300 font-mono" placeholder="atau paste URL foto">
                                 </div>
                             </div>
 
                             <!-- Info Section -->
-                            <div class="w-full space-y-3.5 pt-1">
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nama Lengkap & Gelar</label>
-                                        <input type="text" :name="`aparatur_tambahan[${index}][nama]`" x-model="anggota.nama" placeholder="Cth: Budi Santoso, S.Kom" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-800 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition" required>
-                                    </div>
-                                    <div>
-                                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">NIP (Opsional)</label>
-                                        <input type="text" :name="`aparatur_tambahan[${index}][nip]`" x-model="anggota.nip" placeholder="Cth: 19900101 202012 1 001" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-mono text-slate-700 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition">
-                                    </div>
-                                    <div>
-                                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Jabatan Spesifik</label>
-                                        <input type="text" :name="`aparatur_tambahan[${index}][jabatan]`" x-model="anggota.jabatan" placeholder="Cth: Staf Pelayanan Administrasi" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition" required>
-                                    </div>
-                                    <div>
-                                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Bagian / Seksi (Opsional)</label>
-                                        <input type="text" :name="`aparatur_tambahan[${index}][seksi]`" x-model="anggota.seksi" placeholder="Cth: Seksi Pemerintahan" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-medium text-slate-700 focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition">
-                                    </div>
+                            <div class="grid grid-cols-2 gap-3 mt-3">
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Nama Lengkap & Gelar</label>
+                                    <input type="text" :name="`aparatur_tambahan[${index}][nama]`" x-model="anggota.nama" placeholder="Cth: Budi Santoso, S.Kom" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-bold" required>
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">NIP (Opsional)</label>
+                                    <input type="text" :name="`aparatur_tambahan[${index}][nip]`" x-model="anggota.nip" placeholder="Cth: 19900101 202012 1 001" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-mono">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Jabatan Spesifik</label>
+                                    <input type="text" :name="`aparatur_tambahan[${index}][jabatan]`" x-model="anggota.jabatan" placeholder="Cth: Staf Pelayanan Administrasi" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-semibold" required>
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Bagian / Seksi (Opsional)</label>
+                                    <input type="text" :name="`aparatur_tambahan[${index}][seksi]`" x-model="anggota.seksi" placeholder="Cth: Seksi Pemerintahan" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-semibold">
                                 </div>
                             </div>
                         </div>
                     </template>
-                    
+                </div>
+                
+                <div class="pt-2">
                     <button type="button" @click="tambahAnggota()" class="w-full py-3.5 border-2 border-dashed border-slate-300 hover:border-emerald-400 bg-slate-50/50 hover:bg-emerald-50/50 text-slate-500 hover:text-emerald-600 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2 group">
                         <svg class="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                         Tambah Staf / Anggota Baru
@@ -354,7 +349,7 @@
         <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200/90 space-y-4">
             <div class="flex items-center gap-2 border-b border-slate-200 pb-3">
                 <span class="w-3 h-3 rounded-full bg-teal-600"></span>
-                <h3 class="text-base font-extrabold text-slate-900 uppercase tracking-wide">4. Berkas Gambar Diagram Bagan Organisasi Utuh (Opsional)</h3>
+                <h3 class="text-base font-extrabold text-slate-900 uppercase tracking-wide">Berkas Gambar Diagram Bagan Organisasi Utuh (Opsional)</h3>
             </div>
 
             <div class="space-y-4">

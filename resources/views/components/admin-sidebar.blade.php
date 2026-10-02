@@ -60,6 +60,7 @@
             <span class="text-xs">Overview Dashboard</span>
         </a>
 
+        @if($userRole === 'ADMIN')
         <!-- 1. GROUP: PELAYANAN PUBLIK -->
         <div class="pt-2">
             <button @click="openPelayanan = !openPelayanan"
@@ -97,6 +98,7 @@
                 </a>
             </div>
         </div>
+        @endif
 
         <!-- 2. GROUP: PUBLIKASI & ARSIP -->
         <div class="pt-1">
@@ -148,6 +150,7 @@
             </div>
         </div>
 
+        @if($userRole === 'ADMIN')
         <!-- 3. GROUP: TRANSPARANSI & DATA -->
         <div class="pt-1">
             <button @click="openTransparansi = !openTransparansi"
@@ -181,7 +184,7 @@
                 <a href="{{ route('dashboard.partnerships.index') }}"
                    class="flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all duration-150 {{ request()->routeIs('dashboard.partnerships.*') ? 'text-emerald-400 bg-emerald-500/15 font-bold border-l-2 border-emerald-400 shadow-xs' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40' }}">
                     <span class="w-1.5 h-1.5 rounded-full shrink-0 {{ request()->routeIs('dashboard.partnerships.*') ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]' : 'bg-slate-700' }}"></span>
-                    <span>Kemitraan Kelurahan</span>
+                    <span>Kelola Instansi</span>
                 </a>
             </div>
         </div>
@@ -275,6 +278,7 @@
                 @endif
             </div>
         </div>
+        @endif
 
     </nav>
 
@@ -332,6 +336,7 @@
                 <span>Overview Dashboard</span>
             </a>
 
+            @if($userRole === 'ADMIN')
             <!-- 1. Pelayanan Publik Mobile -->
             <div>
                 <button @click="openPelayanan = !openPelayanan" class="w-full flex items-center justify-between px-3 py-2 text-slate-300 font-extrabold uppercase text-[10px] tracking-wider cursor-pointer">
@@ -345,6 +350,7 @@
                     <a href="{{ route('dashboard.integrations.hallo-sae') }}" class="block py-1.5 px-2 rounded-lg {{ request()->routeIs('dashboard.integrations.hallo-sae') ? 'text-emerald-400 font-bold bg-emerald-500/10' : 'text-slate-400 hover:text-white' }}">Layanan Hallo SAE (WA)</a>
                 </div>
             </div>
+            @endif
 
             <!-- 2. Publikasi & Arsip Mobile -->
             <div>
@@ -362,6 +368,7 @@
                 </div>
             </div>
 
+            @if($userRole === 'ADMIN')
             <!-- 3. Transparansi & Data Mobile -->
             <div>
                 <button @click="openTransparansi = !openTransparansi" class="w-full flex items-center justify-between px-3 py-2 text-slate-300 font-extrabold uppercase text-[10px] tracking-wider cursor-pointer">
@@ -372,7 +379,7 @@
                     <a href="{{ route('dashboard.apbd.index') }}" class="block py-1.5 px-2 rounded-lg {{ request()->routeIs('dashboard.apbd.*') ? 'text-emerald-400 font-bold bg-emerald-500/10' : 'text-slate-400 hover:text-white' }}">APBD & Transparansi</a>
                     <a href="{{ route('dashboard.demographics.index') }}" class="block py-1.5 px-2 rounded-lg {{ request()->routeIs('dashboard.demographics.*') ? 'text-emerald-400 font-bold bg-emerald-500/10' : 'text-slate-400 hover:text-white' }}">Data & Monografi</a>
                     <a href="{{ route('dashboard.lembagas.index') }}" class="block py-1.5 px-2 rounded-lg {{ request()->routeIs('dashboard.lembagas.*') ? 'text-emerald-400 font-bold bg-emerald-500/10' : 'text-slate-400 hover:text-white' }}">Lembaga Kemasyarakatan</a>
-                    <a href="{{ route('dashboard.partnerships.index') }}" class="block py-1.5 px-2 rounded-lg {{ request()->routeIs('dashboard.partnerships.*') ? 'text-emerald-400 font-bold bg-emerald-500/10' : 'text-slate-400 hover:text-white' }}">Kemitraan Kelurahan</a>
+                    <a href="{{ route('dashboard.partnerships.index') }}" class="block py-1.5 px-2 rounded-lg {{ request()->routeIs('dashboard.partnerships.*') ? 'text-emerald-400 font-bold bg-emerald-500/10' : 'text-slate-400 hover:text-white' }}">Kelola Instansi</a>
                 </div>
             </div>
 
@@ -386,6 +393,7 @@
                     <a href="{{ route('dashboard.settings.visi-misi') }}" class="block py-1.5 px-2 rounded-lg {{ request()->routeIs('dashboard.settings.visi-misi') ? 'text-emerald-400 font-bold bg-emerald-500/10' : 'text-slate-400 hover:text-white' }}">Visi & Misi</a>
                     <a href="{{ route('dashboard.settings.sejarah') }}" class="block py-1.5 px-2 rounded-lg {{ request()->routeIs('dashboard.settings.sejarah') ? 'text-emerald-400 font-bold bg-emerald-500/10' : 'text-slate-400 hover:text-white' }}">Sejarah Kelurahan</a>
                     <a href="{{ route('dashboard.settings.aparatur') }}" class="block py-1.5 px-2 rounded-lg {{ request()->routeIs('dashboard.settings.aparatur') ? 'text-emerald-400 font-bold bg-emerald-500/10' : 'text-slate-400 hover:text-white' }}">Struktur & Aparatur</a>
+                    <a href="{{ route('dashboard.settings.tugas-fungsi') }}" class="block py-1.5 px-2 rounded-lg {{ request()->routeIs('dashboard.settings.tugas-fungsi') ? 'text-emerald-400 font-bold bg-emerald-500/10' : 'text-slate-400 hover:text-white' }}">Tugas & Fungsi Kelurahan</a>
                 </div>
             </div>
 
@@ -406,6 +414,7 @@
                     @endif
                 </div>
             </div>
+            @endif
         </nav>
 
         <!-- Logout Mobile -->

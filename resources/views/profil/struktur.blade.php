@@ -96,93 +96,93 @@
         @endphp
 
         <!-- Chart Container -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 md:p-12 shadow-sm overflow-x-auto">
-            <div class="min-w-[850px] flex flex-col items-center">
+        <div class="bg-white rounded-xl md:rounded-2xl border border-slate-200 p-2 md:p-12 shadow-sm overflow-x-hidden">
+            <div class="w-full md:min-w-[850px] flex flex-col items-center">
 
                 <!-- Level 1 (Lurah) -->
-                <div class="relative flex flex-col items-center z-10 mt-4">
+                <div class="relative flex flex-col items-center z-10 mt-2 md:mt-4">
 
-                    <img src="{{ $lurahSrc }}" alt="{{ $lurahNama }}" class="w-28 h-28 rounded-full border-[4px] border-slate-900 shadow-md mb-3 object-cover bg-slate-100">
-                    <h4 class="font-extrabold text-slate-900 text-sm md:text-base">{{ $lurahNama }}</h4>
+                    <img src="{{ $lurahSrc }}" alt="{{ $lurahNama }}" class="w-16 h-16 md:w-28 md:h-28 rounded-full border-2 md:border-[4px] border-slate-900 shadow-md mb-1.5 md:mb-3 object-cover bg-slate-100">
+                    <h4 class="font-extrabold text-slate-900 text-[10px] md:text-base leading-tight text-center px-2">{{ $lurahNama }}</h4>
                     @if($lurahNip)
-                    <p class="text-[11px] font-mono text-slate-500 font-medium">NIP. {{ $lurahNip }}</p>
+                    <p class="text-[7px] md:text-[11px] font-mono text-slate-500 font-medium mt-0.5">NIP. {{ $lurahNip }}</p>
                     @endif
-                    <div class="bg-slate-900 text-white text-[9.5px] font-extrabold px-4 py-1.5 rounded-full mt-1.5 uppercase tracking-widest shadow-2xs">
+                    <div class="bg-slate-900 text-white text-[6px] md:text-[9.5px] font-extrabold px-2 md:px-4 py-1 md:py-1.5 rounded-full mt-1 md:mt-1.5 uppercase tracking-widest shadow-2xs text-center max-w-[90%]">
                         {{ $lurahJabatan }}
                     </div>
                 </div>
 
-                <div class="w-px h-10 bg-slate-300 my-1"></div>
+                <div class="w-px h-6 md:h-10 bg-slate-300 my-1"></div>
 
 
 
                 <!-- Level 3 (Branches) -->
-                <div class="w-full relative pt-6 mt-1">
+                <div class="w-full relative pt-4 md:pt-6 mt-1">
                     <div class="absolute top-0 left-[12.5%] right-[12.5%] h-px bg-slate-300"></div>
 
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 place-content-center">
+                    <div class="grid grid-cols-4 gap-1 md:gap-6 place-content-center w-full px-1 md:px-0">
 
                         <!-- Col 1 (Sekretaris) -->
-                        <div class="flex flex-col items-center text-center relative z-10 group">
-                            <div class="w-px h-6 bg-slate-300 absolute -top-6 left-1/2 -translate-x-1/2"></div>
-                            <img src="{{ $sekSrc }}" alt="{{ $sekNama }}" class="w-20 h-20 rounded-full border-2 border-slate-300 shadow-2xs mb-3 bg-slate-50 object-cover group-hover:-translate-y-1 transition-transform">
-                            <h4 class="font-bold text-slate-900 text-xs mb-0.5">{{ $sekNama }}</h4>
+                        <div class="flex flex-col items-center text-center relative z-10 group px-0.5 md:px-0">
+                            <div class="w-px h-4 md:h-6 bg-slate-300 absolute -top-4 md:-top-6 left-1/2 -translate-x-1/2"></div>
+                            <img src="{{ $sekSrc }}" alt="{{ $sekNama }}" class="w-10 h-10 md:w-20 md:h-20 rounded-full border md:border-2 border-slate-300 shadow-2xs mb-1 md:mb-3 bg-slate-50 object-cover group-hover:-translate-y-1 transition-transform">
+                            <h4 class="font-bold text-slate-900 text-[6px] md:text-xs mb-0.5 leading-tight line-clamp-2">{{ $sekNama }}</h4>
                             @if($sekNip)
-                            <p class="text-[10px] font-mono text-slate-500 mb-1">NIP. {{ $sekNip }}</p>
+                            <p class="text-[5px] md:text-[10px] font-mono text-slate-500 mb-1 leading-tight">NIP. {{ $sekNip }}</p>
                             @endif
-                            <div class="bg-slate-900 text-white text-[8px] font-extrabold px-2 py-1.5 rounded-md w-full uppercase tracking-wider leading-relaxed shadow-2xs mb-2">
+                            <div class="bg-slate-900 text-white text-[5px] md:text-[8px] font-extrabold px-0.5 md:px-2 py-1 md:py-1.5 rounded-sm md:rounded-md w-full uppercase tracking-wider leading-tight shadow-2xs mb-1 md:mb-2 line-clamp-2">
                                 {{ $sekJabatan }}
                             </div>
-                            <div class="border border-slate-200 rounded px-2 py-1.5 bg-slate-50/50 w-full mt-auto">
-                                <span class="text-[7.5px] text-slate-500 uppercase font-bold tracking-wider">{{ $sekSeksi }}</span>
+                            <div class="border border-slate-200 rounded-sm md:rounded px-0.5 md:px-2 py-1 md:py-1.5 bg-slate-50/50 w-full mt-auto">
+                                <span class="text-[4px] md:text-[7.5px] text-slate-500 uppercase font-bold tracking-wider leading-tight block line-clamp-3">{{ $sekSeksi }}</span>
                             </div>
                         </div>
 
                         <!-- Col 2 (Kasi Pem) -->
-                        <div class="flex flex-col items-center text-center relative z-10 group">
-                            <div class="w-px h-6 bg-slate-300 absolute -top-6 left-1/2 -translate-x-1/2"></div>
-                            <img src="{{ $pemSrc }}" alt="{{ $pemNama }}" class="w-20 h-20 rounded-full border-2 border-slate-300 shadow-2xs mb-3 bg-slate-50 object-cover group-hover:-translate-y-1 transition-transform">
-                            <h4 class="font-bold text-slate-900 text-xs mb-0.5">{{ $pemNama }}</h4>
+                        <div class="flex flex-col items-center text-center relative z-10 group px-0.5 md:px-0">
+                            <div class="w-px h-4 md:h-6 bg-slate-300 absolute -top-4 md:-top-6 left-1/2 -translate-x-1/2"></div>
+                            <img src="{{ $pemSrc }}" alt="{{ $pemNama }}" class="w-10 h-10 md:w-20 md:h-20 rounded-full border md:border-2 border-slate-300 shadow-2xs mb-1 md:mb-3 bg-slate-50 object-cover group-hover:-translate-y-1 transition-transform">
+                            <h4 class="font-bold text-slate-900 text-[6px] md:text-xs mb-0.5 leading-tight line-clamp-2">{{ $pemNama }}</h4>
                             @if($pemNip)
-                            <p class="text-[10px] font-mono text-slate-500 mb-1">NIP. {{ $pemNip }}</p>
+                            <p class="text-[5px] md:text-[10px] font-mono text-slate-500 mb-1 leading-tight">NIP. {{ $pemNip }}</p>
                             @endif
-                            <div class="bg-slate-900 text-white text-[8px] font-extrabold px-2 py-1.5 rounded-md w-full uppercase tracking-wider leading-relaxed shadow-2xs mb-2">
+                            <div class="bg-slate-900 text-white text-[5px] md:text-[8px] font-extrabold px-0.5 md:px-2 py-1 md:py-1.5 rounded-sm md:rounded-md w-full uppercase tracking-wider leading-tight shadow-2xs mb-1 md:mb-2 line-clamp-2">
                                 {{ $pemJabatan }}
                             </div>
-                            <div class="border border-slate-200 rounded px-2 py-1.5 bg-slate-50/50 w-full mt-auto">
-                                <span class="text-[7.5px] text-slate-500 uppercase font-bold tracking-wider">{{ $pemSeksi }}</span>
+                            <div class="border border-slate-200 rounded-sm md:rounded px-0.5 md:px-2 py-1 md:py-1.5 bg-slate-50/50 w-full mt-auto">
+                                <span class="text-[4px] md:text-[7.5px] text-slate-500 uppercase font-bold tracking-wider leading-tight block line-clamp-3">{{ $pemSeksi }}</span>
                             </div>
                         </div>
 
                         <!-- Col 3 (Kasi Trantib) -->
-                        <div class="flex flex-col items-center text-center relative z-10 group">
-                            <div class="w-px h-6 bg-slate-300 absolute -top-6 left-1/2 -translate-x-1/2"></div>
-                            <img src="{{ $trantibSrc }}" alt="{{ $trantibNama }}" class="w-20 h-20 rounded-full border-2 border-slate-300 shadow-2xs mb-3 bg-slate-50 object-cover group-hover:-translate-y-1 transition-transform">
-                            <h4 class="font-bold text-slate-900 text-xs mb-0.5">{{ $trantibNama }}</h4>
+                        <div class="flex flex-col items-center text-center relative z-10 group px-0.5 md:px-0">
+                            <div class="w-px h-4 md:h-6 bg-slate-300 absolute -top-4 md:-top-6 left-1/2 -translate-x-1/2"></div>
+                            <img src="{{ $trantibSrc }}" alt="{{ $trantibNama }}" class="w-10 h-10 md:w-20 md:h-20 rounded-full border md:border-2 border-slate-300 shadow-2xs mb-1 md:mb-3 bg-slate-50 object-cover group-hover:-translate-y-1 transition-transform">
+                            <h4 class="font-bold text-slate-900 text-[6px] md:text-xs mb-0.5 leading-tight line-clamp-2">{{ $trantibNama }}</h4>
                             @if($trantibNip)
-                            <p class="text-[10px] font-mono text-slate-500 mb-1">NIP. {{ $trantibNip }}</p>
+                            <p class="text-[5px] md:text-[10px] font-mono text-slate-500 mb-1 leading-tight">NIP. {{ $trantibNip }}</p>
                             @endif
-                            <div class="bg-slate-900 text-white text-[8px] font-extrabold px-2 py-1.5 rounded-md w-full uppercase tracking-wider leading-relaxed shadow-2xs mb-2">
+                            <div class="bg-slate-900 text-white text-[5px] md:text-[8px] font-extrabold px-0.5 md:px-2 py-1 md:py-1.5 rounded-sm md:rounded-md w-full uppercase tracking-wider leading-tight shadow-2xs mb-1 md:mb-2 line-clamp-2">
                                 {{ $trantibJabatan }}
                             </div>
-                            <div class="border border-slate-200 rounded px-2 py-1.5 bg-slate-50/50 w-full mt-auto">
-                                <span class="text-[7.5px] text-slate-500 uppercase font-bold tracking-wider">{{ $trantibSeksi }}</span>
+                            <div class="border border-slate-200 rounded-sm md:rounded px-0.5 md:px-2 py-1 md:py-1.5 bg-slate-50/50 w-full mt-auto">
+                                <span class="text-[4px] md:text-[7.5px] text-slate-500 uppercase font-bold tracking-wider leading-tight block line-clamp-3">{{ $trantibSeksi }}</span>
                             </div>
                         </div>
 
                         <!-- Col 4 (Kasi Kesra) -->
-                        <div class="flex flex-col items-center text-center relative z-10 group">
-                            <div class="w-px h-6 bg-slate-300 absolute -top-6 left-1/2 -translate-x-1/2"></div>
-                            <img src="{{ $kesraSrc }}" alt="{{ $kesraNama }}" class="w-20 h-20 rounded-full border-2 border-slate-300 shadow-2xs mb-3 bg-slate-50 object-cover group-hover:-translate-y-1 transition-transform">
-                            <h4 class="font-bold text-slate-900 text-xs mb-0.5">{{ $kesraNama }}</h4>
+                        <div class="flex flex-col items-center text-center relative z-10 group px-0.5 md:px-0">
+                            <div class="w-px h-4 md:h-6 bg-slate-300 absolute -top-4 md:-top-6 left-1/2 -translate-x-1/2"></div>
+                            <img src="{{ $kesraSrc }}" alt="{{ $kesraNama }}" class="w-10 h-10 md:w-20 md:h-20 rounded-full border md:border-2 border-slate-300 shadow-2xs mb-1 md:mb-3 bg-slate-50 object-cover group-hover:-translate-y-1 transition-transform">
+                            <h4 class="font-bold text-slate-900 text-[6px] md:text-xs mb-0.5 leading-tight line-clamp-2">{{ $kesraNama }}</h4>
                             @if($kesraNip)
-                            <p class="text-[10px] font-mono text-slate-500 mb-1">NIP. {{ $kesraNip }}</p>
+                            <p class="text-[5px] md:text-[10px] font-mono text-slate-500 mb-1 leading-tight">NIP. {{ $kesraNip }}</p>
                             @endif
-                            <div class="bg-slate-900 text-white text-[8px] font-extrabold px-2 py-1.5 rounded-md w-full uppercase tracking-wider leading-relaxed shadow-2xs mb-2">
+                            <div class="bg-slate-900 text-white text-[5px] md:text-[8px] font-extrabold px-0.5 md:px-2 py-1 md:py-1.5 rounded-sm md:rounded-md w-full uppercase tracking-wider leading-tight shadow-2xs mb-1 md:mb-2 line-clamp-2">
                                 {{ $kesraJabatan }}
                             </div>
-                            <div class="border border-slate-200 rounded px-2 py-1.5 bg-slate-50/50 w-full mt-auto">
-                                <span class="text-[7.5px] text-slate-500 uppercase font-bold tracking-wider">{{ $kesraSeksi }}</span>
+                            <div class="border border-slate-200 rounded-sm md:rounded px-0.5 md:px-2 py-1 md:py-1.5 bg-slate-50/50 w-full mt-auto">
+                                <span class="text-[4px] md:text-[7.5px] text-slate-500 uppercase font-bold tracking-wider leading-tight block line-clamp-3">{{ $kesraSeksi }}</span>
                             </div>
                         </div>
 
@@ -196,18 +196,18 @@
                                 $anggotaSrc = $anggotaVal ? (\Illuminate\Support\Str::startsWith($anggotaVal, ['http://', 'https://']) ? $anggotaVal : Storage::url($anggotaVal)) : 'https://ui-avatars.com/api/?name=' . urlencode($anggota['nama'] ?? 'Anggota') . '&background=64748b&color=fff&size=200';
                             }
                         @endphp
-                        <div class="flex flex-col items-center text-center relative z-10 group">
-                            <div class="w-px h-6 bg-slate-300 absolute -top-6 left-1/2 -translate-x-1/2"></div>
-                            <img src="{{ $anggotaSrc }}" alt="{{ $anggota['nama'] }}" class="w-20 h-20 rounded-full border-2 border-slate-300 shadow-2xs mb-3 bg-slate-50 object-cover group-hover:-translate-y-1 transition-transform">
-                            <h4 class="font-bold text-slate-900 text-xs mb-0.5">{{ $anggota['nama'] }}</h4>
+                        <div class="flex flex-col items-center text-center relative z-10 group px-0.5 md:px-0">
+                            <div class="w-px h-4 md:h-6 bg-slate-300 absolute -top-4 md:-top-6 left-1/2 -translate-x-1/2"></div>
+                            <img src="{{ $anggotaSrc }}" alt="{{ $anggota['nama'] }}" class="w-10 h-10 md:w-20 md:h-20 rounded-full border md:border-2 border-slate-300 shadow-2xs mb-1 md:mb-3 bg-slate-50 object-cover group-hover:-translate-y-1 transition-transform">
+                            <h4 class="font-bold text-slate-900 text-[6px] md:text-xs mb-0.5 leading-tight line-clamp-2">{{ $anggota['nama'] }}</h4>
                             @if(!empty($anggota['nip']))
-                            <p class="text-[10px] font-mono text-slate-500 mb-1">NIP. {{ $anggota['nip'] }}</p>
+                            <p class="text-[5px] md:text-[10px] font-mono text-slate-500 mb-1 leading-tight">NIP. {{ $anggota['nip'] }}</p>
                             @endif
-                            <div class="bg-slate-900 text-white text-[8px] font-extrabold px-2 py-1.5 rounded-md w-full uppercase tracking-wider leading-relaxed shadow-2xs mb-2">
+                            <div class="bg-slate-900 text-white text-[5px] md:text-[8px] font-extrabold px-0.5 md:px-2 py-1 md:py-1.5 rounded-sm md:rounded-md w-full uppercase tracking-wider leading-tight shadow-2xs mb-1 md:mb-2 line-clamp-2">
                                 {!! nl2br(e($anggota['jabatan'])) !!}
                             </div>
-                            <div class="border border-slate-200 rounded px-2 py-1.5 bg-slate-50/50 w-full mt-auto">
-                                <span class="text-[7.5px] text-slate-500 uppercase font-bold tracking-wider">{{ !empty($anggota['seksi']) ? $anggota['seksi'] : 'Kelompok Jabatan Fungsional' }}</span>
+                            <div class="border border-slate-200 rounded-sm md:rounded px-0.5 md:px-2 py-1 md:py-1.5 bg-slate-50/50 w-full mt-auto">
+                                <span class="text-[4px] md:text-[7.5px] text-slate-500 uppercase font-bold tracking-wider leading-tight block line-clamp-3">{{ !empty($anggota['seksi']) ? $anggota['seksi'] : 'Kelompok Jabatan Fungsional' }}</span>
                             </div>
                         </div>
                         @endforeach
