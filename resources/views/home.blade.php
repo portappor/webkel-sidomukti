@@ -304,51 +304,60 @@
 </section>
 @endif
 
-<!-- Floating Stats Bar -->
-<section class="relative z-20 py-12 bg-slate-50 border-t border-slate-100">
-    <div class="container mx-auto px-4">
-        <div class="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden flex flex-col items-center">
-            <div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 md:gap-0 p-3 sm:p-6 md:p-0 md:divide-x divide-slate-100">
-                <div class="p-2 md:p-6 text-center group reveal fade-up" data-delay="0">
-                    <div class="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-green-50 text-green-600 mb-1 sm:mb-3 group-hover:bg-green-600 group-hover:text-white transition-all duration-300">
-                        <svg class="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    </div>
-                    <div class="text-base sm:text-2xl md:text-3xl font-extrabold text-slate-800" data-count-to="{{ $settings['demografi_total'] ?? ($settings['jumlah_penduduk'] ?? '2776') }}" data-count-suffix="">0</div>
-                    <p class="text-[8px] sm:text-xs text-slate-500 font-semibold uppercase tracking-wider mt-0.5 sm:mt-1">Jumlah Penduduk</p>
-                </div>
-                <div class="p-2 md:p-6 text-center group reveal fade-up" data-delay="100">
-                    <div class="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-blue-50 text-blue-600 mb-1 sm:mb-3 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
-                        <svg class="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                    </div>
-                    <div class="text-base sm:text-2xl md:text-3xl font-extrabold text-slate-800" data-count-to="{{ $settings['demografi_kk'] ?? '850' }}" data-count-suffix="">0</div>
-                    <p class="text-[8px] sm:text-xs text-slate-500 font-semibold uppercase tracking-wider mt-0.5 sm:mt-1">Kepala Keluarga (KK)</p>
-                </div>
-                <div class="p-2 md:p-6 text-center group reveal fade-up" data-delay="200">
-                    <div class="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-indigo-50 text-indigo-600 mb-1 sm:mb-3 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
-                        <svg class="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                    </div>
-                    <div class="text-base sm:text-2xl md:text-3xl font-extrabold text-slate-800" data-count-to="{{ $settings['demografi_laki'] ?? '1402' }}" data-count-suffix="">0</div>
-                    <p class="text-[8px] sm:text-xs text-slate-500 font-semibold uppercase tracking-wider mt-0.5 sm:mt-1">Laki-Laki</p>
-                </div>
-                <div class="p-2 md:p-6 text-center group reveal fade-up" data-delay="300">
-                    <div class="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-pink-50 text-pink-600 mb-1 sm:mb-3 group-hover:bg-pink-600 group-hover:text-white transition-all duration-300">
-                        <svg class="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                    </div>
-                    <div class="text-base sm:text-2xl md:text-3xl font-extrabold text-slate-800" data-count-to="{{ $settings['demografi_perempuan'] ?? '1374' }}" data-count-suffix="">0</div>
-                    <p class="text-[8px] sm:text-xs text-slate-500 font-semibold uppercase tracking-wider mt-0.5 sm:mt-1">Perempuan</p>
-                </div>
-            </div>
+<!-- Section Statistik & Demografi (Integrated) -->
+<section class="py-16 bg-white relative border-t border-slate-100">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-emerald-600 font-bold tracking-wider uppercase text-xs">Statistik Kelurahan</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2 mb-4">Data & Demografi Warga</h2>
+            <p class="text-slate-500">Gambaran umum statistik kependudukan, wilayah, dan sosial demografi di kelurahan kami.</p>
+        </div>
 
-            <!-- Tombol Selengkapnya ke Statistik & Monografi -->
-            <div class="w-full py-2.5 sm:py-3.5 px-3 sm:px-6 text-center border-t border-slate-100 bg-slate-50/70 flex items-center justify-center reveal fade-up" data-delay="400">
-                <a href="{{ route('profil.demografi') }}" class="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2 sm:py-2.5 bg-[#008c5f] hover:bg-[#00734e] text-white font-extrabold text-[8px] sm:text-xs uppercase tracking-wider rounded-lg sm:rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group cursor-pointer text-center max-w-full">
-                    <span>Lihat Selengkapnya Statistik & Monografi</span>
-                    <svg class="w-3 h-3 sm:w-4 sm:h-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </a>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            @if(($settings['show_penduduk'] ?? '1') == '1')
+            <div class="bg-emerald-50 rounded-2xl p-6 text-center border border-emerald-100 hover:shadow-lg hover:shadow-emerald-100 transition-all duration-300 hover:-translate-y-1">
+                <div class="w-12 h-12 mx-auto bg-emerald-500 text-white rounded-full flex items-center justify-center mb-4 shadow-md shadow-emerald-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                </div>
+                <div class="text-3xl font-extrabold text-emerald-700 mb-1">{{ $settings['demografi_total'] ?? '0' }}</div>
+                <div class="text-sm font-semibold text-emerald-600/80 uppercase tracking-wide">Penduduk</div>
             </div>
+            @endif
+
+            @if(($settings['show_kk'] ?? '1') == '1')
+            <div class="bg-emerald-50 rounded-2xl p-6 text-center border border-emerald-100 hover:shadow-lg hover:shadow-emerald-100 transition-all duration-300 hover:-translate-y-1">
+                <div class="w-12 h-12 mx-auto bg-emerald-500 text-white rounded-full flex items-center justify-center mb-4 shadow-md shadow-emerald-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"></path></svg>
+                </div>
+                <div class="text-3xl font-extrabold text-emerald-700 mb-1">{{ $settings['demografi_kk'] ?? '0' }}</div>
+                <div class="text-sm font-semibold text-emerald-600/80 uppercase tracking-wide">Kepala Keluarga</div>
+            </div>
+            @endif
+
+            @if(($settings['show_wilayah'] ?? '1') == '1')
+            <div class="bg-emerald-50 rounded-2xl p-6 text-center border border-emerald-100 hover:shadow-lg hover:shadow-emerald-100 transition-all duration-300 hover:-translate-y-1">
+                <div class="w-12 h-12 mx-auto bg-emerald-500 text-white rounded-full flex items-center justify-center mb-4 shadow-md shadow-emerald-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0h4m-4 0V11m0 0h4m-4 0v5"></path></svg>
+                </div>
+                <div class="text-3xl font-extrabold text-emerald-700 mb-1">{{ $settings['wilayah_rt'] ?? '0' }}/{{ $settings['wilayah_rw'] ?? '0' }}</div>
+                <div class="text-sm font-semibold text-emerald-600/80 uppercase tracking-wide">RT / RW</div>
+            </div>
+            @endif
+
+            @if(($settings['show_luas'] ?? '1') == '1')
+            <div class="bg-emerald-50 rounded-2xl p-6 text-center border border-emerald-100 hover:shadow-lg hover:shadow-emerald-100 transition-all duration-300 hover:-translate-y-1">
+                <div class="w-12 h-12 mx-auto bg-emerald-500 text-white rounded-full flex items-center justify-center mb-4 shadow-md shadow-emerald-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                </div>
+                <div class="text-3xl font-extrabold text-emerald-700 mb-1">{{ $settings['luas_wilayah'] ?? '0' }}<span class="text-lg">km&sup2;</span></div>
+                <div class="text-sm font-semibold text-emerald-600/80 uppercase tracking-wide">Luas Wilayah</div>
+            </div>
+            @endif
         </div>
     </div>
 </section>
+
+
 
 <!-- Standar Pelayanan & SOP (Grid) -->
 <section id="layanan" class="py-16 bg-white relative z-10 border-b border-slate-100" x-data="{
@@ -915,7 +924,10 @@
         </div>
     </section>
 
-    <!-- 1. Lightbox Modal Foto -->
+    
+
+
+<!-- 1. Lightbox Modal Foto -->
     <div x-show="lightboxOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 z-[100] flex items-center justify-center p-4 lightbox-overlay bg-slate-950/80 backdrop-blur-md" style="display: none;">
         <div class="relative max-w-4xl w-full max-h-[85vh] bg-white rounded-2xl overflow-hidden shadow-2xl border border-slate-200">
             <button @click="lightboxOpen = false" class="absolute top-4 right-4 z-10 w-10 h-10 bg-slate-900/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-red-600 transition cursor-pointer">
